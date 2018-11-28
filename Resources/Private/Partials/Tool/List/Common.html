@@ -1,0 +1,21 @@
+<f:for each="{toolList}" as="tool" iteration="iterator">
+	<!-- box content -->
+	<f:if condition="{settingsArray.maximumShownResults}">
+		<f:then>
+			<f:if condition="{iterator.index} < {settingsArray.maximumShownResults}">
+				<f:render partial="Tool/List/Boxes/Default" arguments="{_all}" />
+			</f:if>
+		</f:then>
+		<f:else>
+			<f:render partial="Tool/List/Boxes/Default" arguments="{_all}" />
+		</f:else>
+	</f:if>
+
+</f:for>
+
+<!-- see more -->
+<f:if condition="{settingsArray.showMoreLink}">
+	<f:if condition="{moreItemsAvailable}">
+		<f:render partial="Tool/List/Boxes/More" arguments="{_all}" />
+	</f:if>
+</f:if>

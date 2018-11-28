@@ -1,0 +1,18 @@
+{namespace rkwBasics=RKW\RkwBasics\ViewHelpers}
+<f:if condition="<rkwBasics:or or1='{settings.showDepartment}' or2='{settings.showCategory}' or3='{settingsArray.showProjects}' />">
+	<f:form id="search-form" noCacheHash="true" action="list" controller="Tool" extensionName="RkwTools" pluginName="Overview" class="ajax" arguments="{ttContentUid: ttContentUid}" additionalAttributes="{data-page-type: '{settings.pageTypeAjax}'}" >
+		<div class="filter search-filter">
+			<f:if condition="{settings.showDepartment}">
+				<f:render partial="Tool/List/Filters/Department" arguments="{_all}" />
+			</f:if>
+			<f:if condition="{settings.showCategory}">
+				<f:render partial="Tool/List/Filters/Category" arguments="{_all}" />
+			</f:if>
+			<f:if condition="{settingsArray.showProjects}">
+				<f:render partial="Tool/List/Filters/Projects" arguments="{_all}" />
+			</f:if>
+		</div>
+		<!-- Override typeNum for AJAX -->
+		<input type="hidden" name="type" value="{settings.pageTypeAjax}">
+	</f:form>
+</f:if>

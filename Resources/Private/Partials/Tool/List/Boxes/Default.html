@@ -1,0 +1,53 @@
+{namespace rkw=RKW\RkwTools\ViewHelpers}
+
+<f:if condition="<rkw:LinkChecker parameter='{tool.link}' />">
+    <div class="box-wrapper">
+        <f:link.typolink parameter="{tool.link}" class="box {tool.department.cssClass} big" target="{f:if(condition: '{settingsArray.openLinksInSameWindow}', then: '', else: '_blank')}" title="{pages.title}">
+            <header>
+                <p>
+                    <f:format.crop maxCharacters="{settingsArray.headerCrop}" respectWordBoundaries="false">{tool.name}</f:format.crop>
+                </p>
+            </header>
+            <f:if condition="{tool.image}" >
+                <f:then>
+                    <div class="box-content wysiwyg">
+                        <figure>
+                            <f:cObject typoscriptObjectPath="plugin.tx_rkwtools.libs.responsiveImageThumbnail" data="{tool.image.uid}"/>
+                        </figure>
+                        <f:comment>
+                            <f:if condition="<rkw:sortOfResource typolink='{tool.link}' />">
+                                <p class="event-date">
+                                    <rkw:sortOfResource typolink='{tool.link}' />
+                                </p>
+                            </f:if>
+                        </f:comment>
+                    </div>
+                </f:then>
+                <f:else>
+                    <div class="box-content">
+                        <div class="wysiwyg">
+                            <p>
+                                <f:format.crop maxCharacters="{settingsArray.contentCrop}" respectWordBoundaries="false">{tool.description}</f:format.crop>
+                            </p>
+                        </div>
+                    </div>
+                </f:else>
+            </f:if>
+            <footer>
+                <p class="icon-list">
+                    <f:translate key="partials_tool_list_boxes_default.tool" extensionName="RkwTools" /><f:if condition="{tool.type}">: {tool.type.name}</f:if>
+                    <f:comment>
+                        <f:if condition="{tool.department}">
+                            <f:then>
+                                <f:format.crop maxCharacters="{settingsArray.footerCrop}" respectWordBoundaries="false">{tool.department.name}</f:format.crop>
+                            </f:then>
+                            <f:else>
+                                <f:translate key="partials_tool_list_boxes_default.tool" extensionName="RkwTools" />
+                            </f:else>
+                        </f:if>
+                    </f:comment>
+                </p>
+            </footer>
+        </f:link.typolink>
+    </div>
+</f:if>

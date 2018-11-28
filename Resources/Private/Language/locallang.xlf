@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2017-12-08T14:52:10Z" product-name="rkw_tools">
+		<header/>
+		<body>
+
+			<!-- ViewHelper -->
+			<trans-unit id="viewhelper.file">
+				<source>File</source>
+			</trans-unit>
+			<trans-unit id="viewhelper.externalPage">
+				<source>External page</source>
+			</trans-unit>
+			<trans-unit id="viewhelper.internalPage">
+				<source>Internal page</source>
+			</trans-unit>
+			<trans-unit id="viewhelper.other">
+				<source>Other</source>
+			</trans-unit>
+
+			<!-- #################### -->
+			<!-- TEMPLATES -->
+			<!-- #################### -->
+
+			<trans-unit id="partials_tool_boxes_more.showMore">
+				<source>Show more now</source>
+			</trans-unit>
+
+			<trans-unit id="partials_tool_boxes_more.interesting">
+				<source>Interesting?</source>
+			</trans-unit>
+			<trans-unit id="partials_tool_boxes_more.morebox1">
+				<source>Interesting?</source>
+			</trans-unit>
+			<trans-unit id="partials_tool_boxes_more.morebox2">
+				<source>Show more now</source>
+			</trans-unit>
+			<trans-unit id="partials_tool_boxes_more.show_more">
+				<source>Show more now</source>
+			</trans-unit>
+
+			<!-- FILTER -->
+
+			<trans-unit id="partials_tool_list_filters.departmentLabelLong">
+				<source>Topics</source>
+			</trans-unit>
+			<trans-unit id="partials_tool_list_filters.showAllDepartment">
+				<source>All topics</source>
+			</trans-unit>
+			<trans-unit id="partials_tool_list_filters.department">
+				<source>Topics:</source>
+			</trans-unit>
+			<trans-unit id="partials_tool_list_filters.showAllCategory">
+				<source>All categories</source>
+			</trans-unit>
+			<trans-unit id="partials_tool_list_filters.showAllProject">
+				<source>All projects</source>
+			</trans-unit>
+			<trans-unit id="partials_tool_list_filters.category">
+				<source>Category</source>
+			</trans-unit>
+
+			<!-- NO RESULTS -->
+
+			<trans-unit id="partials_tool_list_noresults.text1">
+				<source>No results.</source>
+			</trans-unit>
+			<trans-unit id="partials_tool_list_noresults.text2">
+				<source>Please check your search filters.</source>
+			</trans-unit>
+			<trans-unit id="partials_tool_list_noresults.text3">
+				<source>Maybe you've found a research gap ;-)</source>
+			</trans-unit>
+			<trans-unit id="partials_tool_list_noresults.text4">
+				<source>Can we help you in person?</source>
+			</trans-unit>
+			<trans-unit id="partials_tool_list_noresults.text5">
+				<source>We'll happy about calls and mails.</source>
+			</trans-unit>
+			<trans-unit id="partials_tool_list_noresults.phone">
+				<source>Phone: 06196 495-0</source>
+			</trans-unit>
+			<trans-unit id="partials_tool_list_noresults.email">
+				<source>E-Mail:</source>
+			</trans-unit>
+			<trans-unit id="partials_tool_list_noresults.email.title">
+				<source>Write E-Mail</source>
+			</trans-unit>
+
+
+			<!-- List/Boxes/Default -->
+
+			<trans-unit id="partials_tool_list_boxes_default.tool">
+				<source>Tool</source>
+			</trans-unit>
+
+		</body>
+	</file>
+</xliff>

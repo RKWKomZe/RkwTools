@@ -1,0 +1,6 @@
+{namespace rkw=RKW\RkwTools\ViewHelpers}
+<p>
+	<label for="category-select" class="hide"><f:translate key="partials_tool_list_filters.categoryLabelLong" /></label>
+	<f:form.select value="<rkw:selectPreselect filterUid='{selectedCategory}' configList='{settings.sysCategoryList}' />" id="category-select" property="category" name="category" class="secondary ajax" options="{categoryList}" optionValueField="uid" optionLabelField="title" prependOptionLabel="<f:translate key='partials_tool_list_filters.showAllCategory' />" prependOptionValue="0" />
+</p>
+

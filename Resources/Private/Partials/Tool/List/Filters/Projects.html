@@ -1,0 +1,8 @@
+{namespace rkw=RKW\RkwTools\ViewHelpers}
+
+<p>
+	<label for="projects-select" class="hide"><f:translate key="partials_more_list_filters_project.labelLong" /></label>
+	<f:form.select value="<rkw:selectPreselect filterUid='{selectedProjects}' configList='{settings.projectsList}' />" id="projects-select" property="projects" name="projects" class="secondary ajax" options="{projectsList}" optionValueField="uid" optionLabelField="shortName" prependOptionLabel="<f:translate key='partials_tool_list_filters.showAllProject' />" prependOptionValue="0" />
+</p>
+
+

@@ -1,0 +1,41 @@
+
+config.tx_extbase {
+  persistence {
+    classes {
+
+      RKW\RkwBasics\Domain\Model\Category {
+        subclasses {
+          Tx_RkwTools_SysCategory = RKW\RkwTools\Domain\Model\SysCategory
+          
+        }
+      }
+      RKW\RkwBasics\Domain\Model\Department {
+        subclasses {
+          Tx_RkwTools_Department = RKW\RkwTools\Domain\Model\Department
+          
+        }
+      }
+      RKW\RkwTools\Domain\Model\SysCategory {
+        mapping {
+          tableName = sys_category
+          recordType = Tx_RkwTools_SysCategory
+        }
+      }
+
+      RKW\RkwTools\Domain\Model\Pages {
+        mapping {
+          tableName = pages
+          recordType = Tx_RkwTools_Pages
+        }
+      }
+
+      RKW\RkwTools\Domain\Model\Department {
+        mapping {
+          tableName = tx_rkwbasics_domain_model_department
+          recordType = Tx_RkwTools_Department
+        }
+      }
+
+    }
+  }
+}

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2017-12-08T14:52:10Z" product-name="rkw_tools">
+		<header/>
+		<body>
+
+			<!-- ViewHelper -->
+			<trans-unit id="viewhelper.file">
+				<source>File</source>
+				<target>Download</target>
+			</trans-unit>
+			<trans-unit id="viewhelper.externalPage">
+				<source>External page</source>
+				<target>Externe Seite</target>
+			</trans-unit>
+			<trans-unit id="viewhelper.internalPage">
+				<source>Internal page</source>
+				<target>Interne Seite</target>
+			</trans-unit>
+			<trans-unit id="viewhelper.other">
+				<source>Other</source>
+				<target>Anderes</target>
+			</trans-unit>
+
+			<!-- #################### -->
+			<!-- TEMPLATES -->
+			<!-- #################### -->
+
+			<trans-unit id="partials_tool_boxes_more.showMore">
+				<source>Show more now</source>
+				<target>Jetzt mehr anzeigen</target>
+			</trans-unit>
+
+			<trans-unit id="partials_tool_boxes_more.interesting">
+				<source>Interesting?</source>
+				<target>Interessant?</target>
+			</trans-unit>
+			<trans-unit id="partials_tool_boxes_more.morebox1">
+				<source>Interesting?</source>
+				<target>Interessant?</target>
+			</trans-unit>
+			<trans-unit id="partials_tool_boxes_more.morebox2">
+				<source>Show more now</source>
+				<target>Jetzt mehr anzeigen</target>
+			</trans-unit>
+
+
+			<!-- FILTER -->
+
+			<trans-unit id="partials_tool_list_filters.departmentLabelLong">
+				<source>Topics</source>
+				<target>Themen</target>
+			</trans-unit>
+			<trans-unit id="partials_tool_list_filters.showAllDepartment">
+				<source>All topics</source>
+				<target>Alle Themen</target>
+			</trans-unit>
+			<trans-unit id="partials_tool_list_filters.department">
+				<source>Topics:</source>
+				<target>Themen:</target>
+			</trans-unit>
+			<trans-unit id="partials_tool_list_filters.showAllCategory">
+				<source>All categories</source>
+				<target>Alle Kategorien</target>
+			</trans-unit>
+			<trans-unit id="partials_tool_list_filters.showAllProject">
+				<source>All projects</source>
+				<target>Alle Projekte</target>
+			</trans-unit>
+			<trans-unit id="partials_tool_list_filters.category">
+				<source>Category</source>
+				<target>Kategorie</target>
+			</trans-unit>
+
+			<!-- NO RESULTS -->
+
+			<trans-unit id="partials_tool_list_noresults.text1">
+				<source>No results.</source>
+				<target>Leider konnten wir keine passenden Ergebnisse finden.</target>
+			</trans-unit>
+			<trans-unit id="partials_tool_list_noresults.text2">
+				<source>Please check your search filters.</source>
+				<target>Bitte versuchen Sie eine andere Kombination an Filterkriterien.</target>
+			</trans-unit>
+			<trans-unit id="partials_tool_list_noresults.text3">
+				<source>Maybe you've found a research gap ;-)</source>
+				<target>Möglicherweise haben Sie aber auch einfach eine Forschungslücke entdeckt ;-)</target>
+			</trans-unit>
+			<trans-unit id="partials_tool_list_noresults.text4">
+				<source>Can we help you in person?</source>
+				<target>Können wir Ihnen persönlich weiterhelfen?</target>
+			</trans-unit>
+			<trans-unit id="partials_tool_list_noresults.text5">
+				<source>We'll happy about calls and mails.</source>
+				<target>Wir freuen uns über Ihren Anruf oder Ihre E-Mail!</target>
+			</trans-unit>
+			<trans-unit id="partials_tool_list_noresults.phone">
+				<source>Phone: 06196 495-0</source>
+				<target>Tel: 06196 495-0</target>
+			</trans-unit>
+			<trans-unit id="partials_tool_list_noresults.email">
+				<source>E-Mail:</source>
+				<target>E-Mail:</target>
+			</trans-unit>
+			<trans-unit id="partials_tool_list_noresults.email.title">
+				<source>Write E-Mail</source>
+				<target>E-Mail schreiben</target>
+			</trans-unit>
+
+
+			<!-- List/Boxes/Default -->
+
+			<trans-unit id="partials_tool_list_boxes_default.tool">
+				<source>Tool</source>
+				<target>Tool</target>
+			</trans-unit>
+
+
+		</body>
+	</file>
+</xliff>

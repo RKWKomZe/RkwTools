@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2017-12-08T14:52:10Z" product-name="rkw_tools">
+		<header/>
+		<body>
+			<trans-unit id="tx_rkw_tools_domain_model_overview">
+				<source>RKW Tools: Übersicht</source>
+			</trans-unit>
+			<trans-unit id="tx_rkw_tools_domain_model_overview.description">
+				<source></source>
+			</trans-unit>
+
+
+
+			<trans-unit id="tx_rkwtools_domain_model_tool">
+				<source>RKW Tools: Tool</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwtools_domain_model_tool.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwtools_domain_model_tool.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwtools_domain_model_tool.type">
+				<source>Type</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwtools_domain_model_tool.image">
+				<source>Teaser image</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwtools_domain_model_tool.sys_category">
+				<source>Sys Category</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwtools_domain_model_tool.projects">
+				<source>Projects</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwtools_domain_model_tool.department">
+				<source>Department</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwtools_domain_model_tool.link">
+				<source>External link</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwtools_domain_model_tool.tab.reference">
+				<source>Reference</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwtools_domain_model_tool.tab.assignment">
+				<source>Assignments</source>
+			</trans-unit>
+
+
+            <!-- tx_rkwtools_domain_model_tooltype -->
+			<trans-unit id="tx_rkwtools_domain_model_tooltype">
+				<source>RKW Tools: Type</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwtools_domain_model_tooltype.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwtools_domain_model_tooltype.description">
+				<source>Description</source>
+			</trans-unit>
+
+
+			<!-- Flexform -->
+			<trans-unit id="flexform.overview.sheetTitle">
+				<source>Behavior</source>
+			</trans-unit>
+			<trans-unit id="flexform.overview.filterOptions">
+				<source>Plugin pre-filter options</source>
+			</trans-unit>
+			<trans-unit id="flexform.overview.frontendOptions">
+				<source>Frontend options</source>
+			</trans-unit>
+			<trans-unit id="flexform.overview.frontendFilterOptions">
+				<source>Frontend filter options</source>
+			</trans-unit>
+			<trans-unit id="flexform.overview.tool">
+				<source>Tools</source>
+			</trans-unit>
+			<trans-unit id="flexform.overview.misc">
+				<source>Other</source>
+			</trans-unit>
+			<trans-unit id="flexform.overview.department">
+				<source>Topic</source>
+			</trans-unit>
+			<trans-unit id="flexform.overview.department">
+				<source>Topic</source>
+			</trans-unit>
+			<trans-unit id="flexform.overview.projects">
+				<source>Projects</source>
+			</trans-unit>
+			<trans-unit id="flexform.overview.sysCategory">
+				<source>Category</source>
+			</trans-unit>
+			<trans-unit id="flexform.overview.itemsPerPage">
+				<source>Items per page</source>
+			</trans-unit>
+			<trans-unit id="flexform.overview.maximumShownResults">
+				<source>Maximum shown results</source>
+			</trans-unit>
+			<trans-unit id="flexform.overview.showMoreLink">
+				<source>Show more link</source>
+			</trans-unit>
+			<trans-unit id="flexform.overview.autoload">
+				<source>Disable autoload</source>
+			</trans-unit>
+			<trans-unit id="flexform.overview.openWindow">
+				<source>Open links in same window</source>
+			</trans-unit>
+			<trans-unit id="flexform.overview.showDepartment">
+				<source>Show topic option</source>
+			</trans-unit>
+			<trans-unit id="flexform.overview.showSysCategory">
+				<source>Show category option</source>
+			</trans-unit>
+			<trans-unit id="flexform.overview.showProjects">
+				<source>Show project option</source>
+			</trans-unit>
+			<trans-unit id="flexform.overview.noCache">
+				<source>No cache</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

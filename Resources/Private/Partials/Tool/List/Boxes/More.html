@@ -1,0 +1,14 @@
+{namespace rkw=RKW\RkwTools\ViewHelpers}
+<div class="box-wrapper">
+	<f:link.action action="list" controller="Tool" extensionName="RkwTools" pluginName="Overview" id="more-link-{pageNumber}" class="box help ajax next-page small {f:if(condition: '{settingsArray.disabledAutoLoad} == 1', then: '', else: 'autoload')}" title="<f:translate key='partials_tool_boxes_more.showMore' extensionName='RkwTools' />" rel="nofollow" target="_blank" additionalParams="{tx_rkwtools_overview: '{pageNumber: pageNumber, ttContentUid: ttContentUid, department: selectedDepartment, category: selectedCategory}'}" additionalAttributes="{data-page-type: '{settingsArray.pageTypeAjax}'}" >
+		<header>
+			<p>
+				<f:translate key="partials_tool_boxes_more.morebox1" extensionName="RkwTools" />
+				<br>
+				<strong>
+					<f:translate key="partials_tool_boxes_more.morebox2" extensionName="RkwTools" />
+				</strong>
+			</p>
+		</header>
+	</f:link.action>
+</div>

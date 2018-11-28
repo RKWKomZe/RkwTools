@@ -1,0 +1,34 @@
+{
+    "name": "rkw/rkw-tools",
+    "type": "typo3-cms-extension",
+    "description": "Extension for listing tools (PDFs, WebApps etc.) with metadata and filters",
+    "homepage": "https://www.rkw-kompetenzzentrum.de",
+    "license": ["GPL-2.0+"],
+    "keywords": ["TYPO3 CMS", "RKW", "Tools"],
+    "support": {
+        "email": "developer@steffenkroggel.de"
+    },
+    "authors": [
+        {
+            "name": "Maximilian Fäßler",
+            "email": "maximilian@faesslerweb.de",
+            "homepage": "https://www.faesslerweb.de",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "typo3/cms-core": "^7.6.0 || ^8.7.0",
+        "rkw/rkw-basics": "~7.6.12",
+        "rkw/rkw-projects": "~7.6.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "RKW\\Tools\\": "Classes/"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "rkw_tools"
+        }
+    }
+}

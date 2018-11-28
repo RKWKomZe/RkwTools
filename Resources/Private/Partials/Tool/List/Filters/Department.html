@@ -1,0 +1,19 @@
+{namespace rkw=RKW\RkwTools\ViewHelpers}
+<div>
+	<fieldset>
+		<legend class="hide"><f:translate key="partials_tool_list_filters.departmentLabelLong" /></legend>
+		<ul>
+			<li class="description" role="presentation"><f:translate key="partials_tool_list_filters.department" extensionName="rkwTools" /></li>
+			<li>
+				<f:form.radio property="department" name="department" value="" checked="checked" id="department-all" tabindex="1" />
+				<label for="department-all"><f:translate key="partials_tool_list_filters.showAllDepartment" /></label>
+			</li>
+			<f:for each="{departmentList}" as="department">
+				<li>
+					<f:form.radio id="{department.name}" value="{department.uid}" property="department" name="department" checked="<rkw:radioPreselect currentUid='{department.uid}' filterUid='{selectedDepartment.uid}' configList='{settings.departmentList}' />"/>
+					<label class="{department.cssClass}" for="{department.name}">{department.name}</label>
+				</li>
+			</f:for>
+		</ul>
+	</fieldset>
+</div>
