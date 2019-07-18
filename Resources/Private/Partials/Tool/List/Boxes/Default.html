@@ -1,8 +1,11 @@
-{namespace rkw=RKW\RkwTools\ViewHelpers}
+{namespace rkwTools=RKW\RkwTools\ViewHelpers}
+{namespace rkwEtracker=RKW\RkwEtracker\ViewHelpers}
 
-<f:if condition="<rkw:LinkChecker parameter='{tool.link}' />">
+
+<f:if condition="<rkwTools:LinkChecker parameter='{tool.link}' />">
     <div class="box-wrapper">
-        <f:link.typolink parameter="{tool.link}" class="box {tool.department.cssClass} big" target="{f:if(condition: '{settingsArray.openLinksInSameWindow}', then: '', else: '_blank')}" title="{pages.title}">
+
+        <rkwEtracker:link.typolink parameter="{tool.link}" class="box {tool.department.cssClass} big" target="{f:if(condition: '{settingsArray.openLinksInSameWindow}', then: '', else: '_blank')}" title="{pages.title}">
             <header>
                 <p>
                     <f:format.crop maxCharacters="{settingsArray.headerCrop}" respectWordBoundaries="false">{tool.name}</f:format.crop>
@@ -15,9 +18,9 @@
                             <f:cObject typoscriptObjectPath="plugin.tx_rkwtools.libs.responsiveImageThumbnail" data="{tool.image.uid}"/>
                         </figure>
                         <f:comment>
-                            <f:if condition="<rkw:sortOfResource typolink='{tool.link}' />">
+                            <f:if condition="<rkwTools:sortOfResource typolink='{tool.link}' />">
                                 <p class="event-date">
-                                    <rkw:sortOfResource typolink='{tool.link}' />
+                                    <rkwTools:sortOfResource typolink='{tool.link}' />
                                 </p>
                             </f:if>
                         </f:comment>
@@ -48,6 +51,6 @@
                     </f:comment>
                 </p>
             </footer>
-        </f:link.typolink>
+        </rkwEtracker:link.typolink>
     </div>
 </f:if>
