@@ -12,6 +12,9 @@ call_user_func(
 
 		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($extKey, 'Configuration/TypoScript', 'RKW Tools');
 
+        //=================================================================
+        // Add Tables
+        //=================================================================
 		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_rkwtools_domain_model_tool', 'EXT:rkw_tools/Resources/Private/Language/locallang_csh_tx_rkwtools_domain_model_tool.xlf');
 		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_rkwtools_domain_model_tool');
 
