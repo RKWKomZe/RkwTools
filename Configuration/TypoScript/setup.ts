@@ -35,7 +35,8 @@ plugin.tx_rkwtools_overview {
 		#recursive = 1
 	}
 	features {
-		#skipDefaultArguments = 1
+        # see: https://docs.typo3.org/c/typo3/cms-core/master/en-us/Changelog/8.5/Breaking-78002-EnforceCHashArgumentForExtbaseActions.html
+        requireCHashArgumentForActionArguments = 0
 	}
 	mvc {
 		#callDefaultActionIfActionCantBeResolved = 1
