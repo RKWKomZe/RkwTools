@@ -53,8 +53,8 @@ plugin.tx_rkwtools_overview {
 	}
 }
 
-tx_rkwtools_overview_ajax = PAGE
-tx_rkwtools_overview_ajax {
+txRkwToolsOverviewAjax = PAGE
+txRkwToolsOverviewAjax {
 	typeNum = {$plugin.tx_rkwtools_overview.settings.pageTypeAjax}
 	config {
 
