@@ -21,14 +21,12 @@ $EM_CONF[$_EXTKEY] = [
 	'uploadfolder' => '1',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '7.6.7',
+	'version' => '8.7.0',
 	'constraints' => [
 		'depends' => [
-            'extbase' => '7.6.0-7.6.99',
-            'fluid' => '7.6.0-7.6.99',
             'typo3' => '7.6.0-7.6.99',
-			'rkw_basics' => '7.6.10-8.7.99',
-			'rkw_projects' => '7.6.10-8.7.99',
+			'rkw_basics' => '8.7.0-8.7.99',
+			'rkw_projects' => '8.7.0-8.7.99',
 		],
 		'conflicts' => [],
 		'suggests' => [],
