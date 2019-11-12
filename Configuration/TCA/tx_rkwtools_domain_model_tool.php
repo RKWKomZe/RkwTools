@@ -209,12 +209,9 @@ return [
 					'link' => [
 						'type' => 'popup',
 						'title' => 'LLL:EXT:cms/locallang_ttc.xlf:header_link_formlabel',
-						'icon' => 'link_popup.gif',
+						'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
 						'module' => [
-							'name' => 'wizard_element_browser',
-							'urlParameters' => [
-								'mode' => 'wizard'
-							]
+							'name' => 'wizard_link',
 						],
 						'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
 					]
