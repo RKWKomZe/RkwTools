@@ -63,12 +63,15 @@
             <!-- tx_rkwtools_domain_model_tooltype -->
 			<trans-unit id="tx_rkwtools_domain_model_tooltype">
 				<source>RKW Tools: Type</source>
+                <target>RKW Tools: Typ</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwtools_domain_model_tooltype.name">
 				<source>Name</source>
+				<target>Name</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwtools_domain_model_tooltype.description">
 				<source>Description</source>
+				<target>Beschreibung</target>
 			</trans-unit>
 
 
