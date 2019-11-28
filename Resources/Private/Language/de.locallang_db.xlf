@@ -48,8 +48,16 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwtools_domain_model_tool.link">
 				<source>Resource</source>
-				<target>Ressource (Interner Link, externer Link, Datei)</target>
+				<target>Ressource (Interner Link, externer Link)</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwtools_domain_model_tool.linkFile">
+                <source>Resource</source>
+                <target>Ressource (Datei)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwtools_domain_model_tool.linkToFile">
+                <source>Is a file</source>
+                <target>Ressource ist eine Datei</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwtools_domain_model_tool.tab.reference">
 				<source>Reference</source>
 				<target>Referenz</target>

@@ -39,6 +39,9 @@
 			<trans-unit id="tx_rkwtools_domain_model_tool.link">
 				<source>External link</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwtools_domain_model_tool.linkFile">
+                <source>File link</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwtools_domain_model_tool.tab.reference">
 				<source>Reference</source>
 			</trans-unit>

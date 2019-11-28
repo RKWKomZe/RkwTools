@@ -16,16 +16,16 @@ return [
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		],
-		'searchFields' => 'name,description,image,link,sys_category,projects,department',
+		'searchFields' => 'name,description,image,link,link_file,link_to_file,sys_category,projects,department',
 		'iconfile' => 'EXT:rkw_tools/Resources/Public/Icons/tx_rkwtools_domain_model_tool.gif',
 		'dividers2tabs' => TRUE,
-		'requestUpdate' => 'sys_category_parent'
+		'requestUpdate' => 'link_to_file,sys_category_parent'
 	],
 	'interface' => [
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, description, type, image, link, sys_category, projects, department',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, description, type, image, link, link_file, link_to_file, sys_category, projects, department',
 	],
 	'types' => [
-		'1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, description, image, --div--;LLL:EXT:rkw_tools/Resources/Private/Language/locallang_db.xlf:tx_rkwtools_domain_model_tool.tab.reference, link, --div--;LLL:EXT:rkw_tools/Resources/Private/Language/locallang_db.xlf:tx_rkwtools_domain_model_tool.tab.assignment, type, department, sys_category, projects, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+		'1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, description, image, --div--;LLL:EXT:rkw_tools/Resources/Private/Language/locallang_db.xlf:tx_rkwtools_domain_model_tool.tab.reference, link_to_file, link, link_file, --div--;LLL:EXT:rkw_tools/Resources/Private/Language/locallang_db.xlf:tx_rkwtools_domain_model_tool.tab.assignment, type, department, sys_category, projects, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
 	],
 	'columns' => [
 		'sys_language_uid' => [
@@ -198,6 +198,7 @@ return [
 			),
 		],
 		'link' => [
+            'displayCond' => 'FIELD:link_to_file:=:0',
 			'label' => 'LLL:EXT:cms/locallang_ttc.xlf:header_link',
 			'exclude' => false,
 			'config' => [
@@ -213,12 +214,37 @@ return [
 						'module' => [
 							'name' => 'wizard_link',
 						],
-						'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
-					]
+						'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1',
+                        'params' => array(
+                            'blindLinkOptions' => 'file, spec',
+                        ),
+
+
+                    ]
 				],
 				'softref' => 'typolink'
 			]
 		],
+        'link_file' => array(
+            'displayCond' => 'FIELD:link_to_file:=:1',
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_tools/Resources/Private/Language/locallang_db.xlf:tx_rkwtools_domain_model_tool.linkFile',
+            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+                'file',
+                array('maxitems' => 5),
+                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
+            ),
+        ),
+        'link_to_file' => [
+            // onChange is for Typo3 8.7
+            'onChange' => 'reload',
+            'exclude' => true,
+            'label' => 'LLL:EXT:rkw_tools/Resources/Private/Language/locallang_db.xlf:tx_rkwtools_domain_model_tool.linkToFile',
+            'config' => [
+                'type' => 'check',
+                'default' => 0
+            ],
+        ],
 		'sys_category' => [
 			'exclude' => false,
 			'label' => 'LLL:EXT:rkw_tools/Resources/Private/Language/locallang_db.xlf:tx_rkwtools_domain_model_tool.sys_category',

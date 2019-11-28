@@ -13,6 +13,8 @@ CREATE TABLE tx_rkwtools_domain_model_tool (
 	sys_category varchar(255) DEFAULT '' NOT NULL,
 	department int(11) unsigned DEFAULT '0',
 	link varchar(255) DEFAULT '' NOT NULL,
+	link_file varchar(255) DEFAULT '' NOT NULL,
+	link_to_file tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	projects varchar(255) DEFAULT '' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,

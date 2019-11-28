@@ -39,6 +39,13 @@ class Tool extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $description;
 
     /**
+     * fileToLink
+     *
+     * @var bool
+     */
+    protected $fileToLink;
+
+    /**
      * type
      *
      * @var \RKW\RkwTools\Domain\Model\ToolType
@@ -51,6 +58,14 @@ class Tool extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var string
      */
     protected $link;
+
+    /**
+     * linkFile
+     *
+     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
+     * @cascade remove
+     */
+    protected $linkFile;
 
     /**
      * image
@@ -148,6 +163,22 @@ class Tool extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * @return boolean
+     */
+    public function isFileToLink()
+    {
+        return $this->fileToLink;
+    }
+
+    /**
+     * @param boolean $fileToLink
+     */
+    public function setFileToLink($fileToLink)
+    {
+        $this->fileToLink = $fileToLink;
+    }
+
+    /**
      * Returns the type
      *
      * @return \RKW\RkwTools\Domain\Model\ToolType
@@ -187,6 +218,27 @@ class Tool extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setLink($link)
     {
         $this->link = $link;
+    }
+
+    /**
+     * Returns the linkFile
+     *
+     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $linkFile
+     */
+    public function getLinkFile()
+    {
+        return $this->linkFile;
+    }
+
+    /**
+     * Sets the linkFile
+     *
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $linkFile
+     * @return void
+     */
+    public function setLinkFile(\TYPO3\CMS\Extbase\Domain\Model\FileReference $linkFile)
+    {
+        $this->linkFile = $linkFile;
     }
 
     /**
