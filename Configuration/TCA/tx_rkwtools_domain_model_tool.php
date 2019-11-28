@@ -231,7 +231,7 @@ return [
             'label' => 'LLL:EXT:rkw_tools/Resources/Private/Language/locallang_db.xlf:tx_rkwtools_domain_model_tool.linkFile',
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
                 'file',
-                array('maxitems' => 5),
+                array('maxitems' => 1),
                 $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
             ),
         ),
