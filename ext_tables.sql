@@ -81,12 +81,6 @@ CREATE TABLE sys_category (
 
 );
 
-#
-# Table structure for table 'pages'
-#
-CREATE TABLE pages (
-
-);
 
 #
 # Table structure for table 'tx_rkwbasics_domain_model_department'
