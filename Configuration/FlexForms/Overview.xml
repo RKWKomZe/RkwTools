@@ -57,7 +57,7 @@
                             <label>LLL:EXT:rkw_tools/Resources/Private/Language/locallang_db.xlf:flexform.overview.sysCategory</label>
                             <config>
                                 <autoSizeMax>50</autoSizeMax>
-                                <maxitems>5</maxitems>
+                                <maxitems>9999</maxitems>
                                 <minitems>0</minitems>
                                 <type>select</type>
                                 <foreign_table>sys_category</foreign_table>
