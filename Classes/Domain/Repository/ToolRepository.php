@@ -8,6 +8,7 @@ use \RKW\RkwBasics\Domain\Model\Category;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -128,9 +129,23 @@ class ToolRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             $query->matching($query->logicalAnd($constraints));
         }
 
-        // order by tool list orderings if is set, otherwise by crdate
-        if ($typoScriptSettings['toolList']) {
-            $query->setOrderings($this->orderByKey('uid', GeneralUtility::trimExplode(',', $typoScriptSettings['toolList'])));
+        /**
+         * @toDo not working with TYPO3 8.7 and above
+         * @see https://stackoverflow.com/questions/56148787/typo3-9-5-custom-flexform-ordering-wrong-backquotes-in-sql
+         */
+        $currentVersion = VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version);
+        if ($currentVersion < 8000000) {
+
+            // order by tool list orderings if is set, otherwise by crdate
+            if ($typoScriptSettings['toolList']) {
+                $query->setOrderings($this->orderByKey('uid', GeneralUtility::trimExplode(',', $typoScriptSettings['toolList'])));
+            } else {
+                $query->setOrderings(
+                    array(
+                        'crdate' => QueryInterface::ORDER_DESCENDING,
+                    )
+                );
+            }
         } else {
             $query->setOrderings(
                 array(
@@ -138,6 +153,8 @@ class ToolRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 )
             );
         }
+
+
 
         if ($pageNumber) {
             if ($pageNumber <= 1) {
