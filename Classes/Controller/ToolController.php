@@ -6,6 +6,7 @@ use \RKW\RkwBasics\Domain\Model\Department;
 use \RKW\RkwBasics\Domain\Model\Category;
 use \RKW\RkwProjects\Domain\Model\Projects;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /*
  * This file is part of the TYPO3 CMS project.

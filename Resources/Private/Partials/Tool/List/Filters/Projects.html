@@ -1,8 +1,12 @@
-{namespace rkw=RKW\RkwTools\ViewHelpers}
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwTools/ViewHelpers"
+    data-namespace-typo3-fluid="true">
 
-<p>
-	<label for="projects-select" class="hide"><f:translate key="partials_more_list_filters_project.labelLong" /></label>
-	<f:form.select value="<rkw:selectPreselect filterUid='{selectedProjects}' configList='{settings.projectsList}' />" id="projects-select" property="projects" name="projects" class="secondary ajax" options="{projectsList}" optionValueField="uid" optionLabelField="shortName" prependOptionLabel="<f:translate key='partials_tool_list_filters.showAllProject' />" prependOptionValue="0" />
-</p>
+    <p>
+        <label for="projects-select" class="hide"><f:translate key="partials_more_list_filters_project.labelLong" /></label>
+        <f:form.select value="<rkw:selectPreselect filterUid='{selectedProjects}' configList='{settings.projectsList}' />" id="projects-select" property="projects" name="projects" class="secondary ajax" options="{projectsList}" optionValueField="uid" optionLabelField="shortName" prependOptionLabel="<f:translate key='partials_tool_list_filters.showAllProject' />" prependOptionValue="0" />
+    </p>
+
+</html>
 
 

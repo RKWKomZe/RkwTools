@@ -19,6 +19,7 @@ return [
 		'searchFields' => 'name,description,image,link,sys_category,projects,department',
 		'iconfile' => 'EXT:rkw_tools/Resources/Public/Icons/tx_rkwtools_domain_model_tool.gif',
 		'dividers2tabs' => TRUE,
+        //@toDo: does this mean 'sys_category'?
 		'requestUpdate' => 'sys_category_parent'
 	],
 	'interface' => [
@@ -86,27 +87,35 @@ return [
 		],
 		'starttime' => [
 			'exclude' => true,
-			'l10n_mode' => 'mergeIfNotBlank',
+			//'l10n_mode' => 'mergeIfNotBlank',
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
 			'config' => [
 				'type' => 'input',
+                'renderType' => 'inputDateTime',
 				'size' => 13,
 				'eval' => 'datetime',
 				'default' => 0,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ]
 			]
 		],
 		'endtime' => [
 			'exclude' => true,
-			'l10n_mode' => 'mergeIfNotBlank',
+			//'l10n_mode' => 'mergeIfNotBlank',
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
 			'config' => [
 				'type' => 'input',
+                'renderType' => 'inputDateTime',
 				'size' => 13,
 				'eval' => 'datetime',
 				'default' => 0,
 				'range' => [
 					'upper' => mktime(0, 0, 0, 1, 1, 2038)
-				]
+				],
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ]
 			],
 		],
 		'name' => [
@@ -209,7 +218,7 @@ return [
 					'link' => [
 						'type' => 'popup',
 						'title' => 'LLL:EXT:cms/locallang_ttc.xlf:header_link_formlabel',
-						'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
+						'icon' => 'actions-wizard-link',
 						'module' => [
 							'name' => 'wizard_link',
 						],

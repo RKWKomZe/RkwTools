@@ -17,6 +17,7 @@ return [
 		'searchFields' => 'name,description,image,link,sys_category,projects,department',
 		'iconfile' => 'EXT:rkw_tools/Resources/Public/Icons/tx_rkwtools_domain_model_tooltype.gif',
 		'dividers2tabs' => TRUE,
+        //@toDo: does this mean 'sys_category' of the tool-TCA??
 		'requestUpdate' => 'sys_category_parent'
 	],
 	'interface' => [

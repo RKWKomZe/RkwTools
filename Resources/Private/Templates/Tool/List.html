@@ -12,11 +12,11 @@ in /Configuration/ExtensionBuilder/settings.yaml:
 
 Otherwise your changes will be overwritten the next time you save the extension in the extension builder
 
-<f:section name="main">
-	<f:render partial="Tool/List/Filter" arguments="{_all}" />
+    <f:section name="main">
+        <f:render partial="Tool/List/Filter" arguments="{_all}" />
 
-	<div id="tx-rkwtools-result-section" class="search-result-section" aria-live="assertive" aria-atomic="true" role="main">
-		<f:render partial="Tool/List" section="Replace" arguments="{_all}" />
-	</div>
-</f:section>
+        <div id="tx-rkwtools-result-section" class="search-result-section" aria-live="assertive" aria-atomic="true" role="main">
+            <f:render partial="Tool/List" section="Replace" arguments="{_all}" />
+        </div>
+    </f:section>
 </html>
