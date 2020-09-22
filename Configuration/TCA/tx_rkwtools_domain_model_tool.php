@@ -211,20 +211,10 @@ return [
 			'exclude' => false,
 			'config' => [
 				'type' => 'input',
+                'renderType' => 'inputLink',
 				'size' => '50',
 				'max' => '1024',
 				'eval' => 'trim, required',
-				'wizards' => [
-					'link' => [
-						'type' => 'popup',
-						'title' => 'LLL:EXT:cms/locallang_ttc.xlf:header_link_formlabel',
-						'icon' => 'actions-wizard-link',
-						'module' => [
-							'name' => 'wizard_link',
-						],
-						'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
-					]
-				],
 				'softref' => 'typolink'
 			]
 		],
