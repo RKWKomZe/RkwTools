@@ -1,8 +1,10 @@
 <f:section name="Replace">
 	<f:if condition="{toolList}">
 		<f:then>
-			<div id="tx-rkwtools-boxes-grid" class="boxes-grid">
-				<f:render partial="Tool/List/Common" arguments="{_all}" />
+			<div id="tx-rkwtools-boxes-grid" class="tiles-wrapper">
+                <div class="tiles flex-container flex-container--margin">
+				    <f:render partial="Tool/List/Common" arguments="{_all}" />
+                </div>
 			</div>
 		</f:then>
 		<f:else>

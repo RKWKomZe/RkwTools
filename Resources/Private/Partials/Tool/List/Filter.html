@@ -3,8 +3,18 @@
     data-namespace-typo3-fluid="true">
 
     <f:if condition="<rkwBasics:or or1='{settings.showDepartment}' or2='{settings.showCategory}' or3='{settingsArray.showProjects}' />">
-        <f:form id="search-form" noCacheHash="true" action="list" controller="Tool" extensionName="RkwTools" pluginName="Overview" class="ajax" arguments="{ttContentUid: ttContentUid}" additionalAttributes="{data-page-type: '{settings.pageTypeAjax}'}" >
-            <div class="filter search-filter">
+        <f:form
+            id="search-form"
+            class="ajax"
+            noCacheHash="true"
+            action="list"
+            controller="Tool"
+            extensionName="RkwTools"
+            pluginName="Overview"
+            arguments="{ttContentUid: ttContentUid}"
+            additionalAttributes="{data-page-type: '{settings.pageTypeAjax}'}"
+        >
+            <div class="btn-list btn-list--desktop">
                 <f:if condition="{settings.showDepartment}">
                     <f:render partial="Tool/List/Filters/Department" arguments="{_all}" />
                 </f:if>
