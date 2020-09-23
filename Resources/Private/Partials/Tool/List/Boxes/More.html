@@ -3,6 +3,7 @@
     xmlns:rkwAjax="http://typo3.org/ns/RKW/RkwAjax/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
+    <rkwAjax:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="replace" ajaxId="3">
         <div class="flex-container flex-basis-12">
             <f:link.action
                 action="list"
@@ -14,13 +15,12 @@
                 rel="nofollow"
                 target="_blank"
                 additionalParams="{tx_rkwtools_overview: '{pageNumber: pageNumber, ttContentUid: ttContentUid, department: selectedDepartment, category: selectedCategory}', rkw_ajax : '{key: ajaxHelper.key, cid: ajaxHelper.contentUid, idl: \'2,3\'}'}"
-                additionalAttributes="{data-page-type: '{settingsArray.pageTypeAjax}'}"
             >
 
                 <strong><f:translate key="partials_tool_boxes_more.morebox2" extensionName="RkwTools" /></strong>
 
             </f:link.action>
         </div>
-
+    </rkwAjax:ajaxWrapper>
 
 </html>

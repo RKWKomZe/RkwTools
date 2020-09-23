@@ -43,6 +43,7 @@ plugin.tx_rkwtools_overview {
 	}
 
 	settings {
+        version = {$plugin.tx_rkwtools_overview.settings.version}
 		cache {
 			ttl = {$plugin.tx_rkwtools_overview.settings.cache.ttl}
 		}

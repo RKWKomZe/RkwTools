@@ -20,7 +20,7 @@ return [
 		'iconfile' => 'EXT:rkw_tools/Resources/Public/Icons/tx_rkwtools_domain_model_tool.gif',
 		'dividers2tabs' => TRUE,
         //@toDo: does this mean 'sys_category'?
-		'requestUpdate' => 'sys_category_parent'
+		//'requestUpdate' => 'sys_category_parent'
 	],
 	'interface' => [
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, description, type, image, link, sys_category, projects, department',

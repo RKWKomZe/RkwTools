@@ -12,7 +12,7 @@
             extensionName="RkwTools"
             pluginName="Overview"
             arguments="{ttContentUid: ttContentUid}"
-            additionalAttributes="{data-page-type: '{settings.pageTypeAjax}'}"
+            additionalParams="{rkw_ajax : '{key: ajaxHelper.key, cid: ajaxHelper.contentUid, idl: \'1\'}'}"
         >
             <div class="btn-list btn-list--desktop">
                 <f:if condition="{settings.showDepartment}">
@@ -25,8 +25,6 @@
                     <f:render partial="Tool/List/Filters/Projects" arguments="{_all}" />
                 </f:if>
             </div>
-            <!-- Override typeNum for AJAX -->
-            <input type="hidden" name="type" value="{settings.pageTypeAjax}">
         </f:form>
     </f:if>
 

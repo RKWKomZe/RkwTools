@@ -19,6 +19,8 @@ plugin.tx_rkwtools_overview {
 		storagePid =
 	}
 	settings {
+        # cat=plugin.tx_rkwtools//f; type=integer; label=Version to use (the version is mainly related to the new RkwAjax-API)
+        version = 2
 		cache {
 			# cat=plugin.tx_rkwtools_overview//a; type=integer; label=Cache time to live
 			ttl = 86400

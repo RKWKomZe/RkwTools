@@ -29,7 +29,7 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
  * @package RKW_RkwTools
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class ToolController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class ToolController extends \RKW\RkwAjax\Controller\AjaxAbstractController
 {
     /**
      * $toolList
@@ -218,12 +218,17 @@ class ToolController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         );
 
         // 5. distinguish between normal view and ajax request
+        // Hint: If we're using AjaxApi 2, we use simple assignMultiple and no "exit();" statement
         if (
             GeneralUtility::_GP('type') != intval($this->settings['pageTypeAjax'])
             && $pageNumber === 1
+            || $this->settings['version'] == 2
         ) {
             $this->view->assignMultiple($replacements);
         } else {
+
+            // @DEPRECATED This part is just vor using the old AjaxApi
+
             // get JSON helper
             /** @var \RKW\RkwBasics\Helper\Json $jsonHelper */
             $jsonHelper = GeneralUtility::makeInstance('RKW\\RkwBasics\\Helper\\Json');
