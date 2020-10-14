@@ -23,8 +23,8 @@
 			<!-- #################### -->
 
 			<trans-unit id="partials_tool_boxes_more.showMore">
-				<source>Show more now</source>
-			</trans-unit>
+                <source>Show more</source>
+             </trans-unit>
 
 			<trans-unit id="partials_tool_boxes_more.interesting">
 				<source>Interesting?</source>
@@ -38,6 +38,7 @@
 			<trans-unit id="partials_tool_boxes_more.show_more">
 				<source>Show more now</source>
 			</trans-unit>
+
 
 			<!-- FILTER -->
 
