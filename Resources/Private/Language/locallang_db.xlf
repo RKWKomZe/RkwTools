@@ -93,14 +93,8 @@
 			<trans-unit id="flexform.overview.itemsPerPage">
 				<source>Items per page</source>
 			</trans-unit>
-			<trans-unit id="flexform.overview.maximumShownResults">
-				<source>Maximum shown results</source>
-			</trans-unit>
 			<trans-unit id="flexform.overview.showMoreLink">
 				<source>Show more link</source>
-			</trans-unit>
-			<trans-unit id="flexform.overview.autoload">
-				<source>Disable autoload</source>
 			</trans-unit>
 			<trans-unit id="flexform.overview.openWindow">
 				<source>Open links in same window</source>

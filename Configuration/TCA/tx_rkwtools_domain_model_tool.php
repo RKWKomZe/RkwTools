@@ -19,7 +19,8 @@ return [
 		'searchFields' => 'name,description,image,link,sys_category,projects,department',
 		'iconfile' => 'EXT:rkw_tools/Resources/Public/Icons/tx_rkwtools_domain_model_tool.gif',
 		'dividers2tabs' => TRUE,
-		'requestUpdate' => 'sys_category_parent'
+        //@toDo: does this mean 'sys_category'?
+		//'requestUpdate' => 'sys_category_parent'
 	],
 	'interface' => [
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, description, type, image, link, sys_category, projects, department',
@@ -86,27 +87,35 @@ return [
 		],
 		'starttime' => [
 			'exclude' => true,
-			'l10n_mode' => 'mergeIfNotBlank',
+			//'l10n_mode' => 'mergeIfNotBlank',
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
 			'config' => [
 				'type' => 'input',
+                'renderType' => 'inputDateTime',
 				'size' => 13,
 				'eval' => 'datetime',
 				'default' => 0,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ]
 			]
 		],
 		'endtime' => [
 			'exclude' => true,
-			'l10n_mode' => 'mergeIfNotBlank',
+			//'l10n_mode' => 'mergeIfNotBlank',
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
 			'config' => [
 				'type' => 'input',
+                'renderType' => 'inputDateTime',
 				'size' => 13,
 				'eval' => 'datetime',
 				'default' => 0,
 				'range' => [
 					'upper' => mktime(0, 0, 0, 1, 1, 2038)
-				]
+				],
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ]
 			],
 		],
 		'name' => [
@@ -202,20 +211,10 @@ return [
 			'exclude' => false,
 			'config' => [
 				'type' => 'input',
+                'renderType' => 'inputLink',
 				'size' => '50',
 				'max' => '1024',
 				'eval' => 'trim, required',
-				'wizards' => [
-					'link' => [
-						'type' => 'popup',
-						'title' => 'LLL:EXT:cms/locallang_ttc.xlf:header_link_formlabel',
-						'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
-						'module' => [
-							'name' => 'wizard_link',
-						],
-						'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
-					]
-				],
 				'softref' => 'typolink'
 			]
 		],

@@ -27,8 +27,8 @@
 			<!-- #################### -->
 
 			<trans-unit id="partials_tool_boxes_more.showMore">
-				<source>Show more now</source>
-				<target>Jetzt mehr anzeigen</target>
+                <source>Show more</source>
+                <target>Mehr anzeigen</target>
 			</trans-unit>
 
 			<trans-unit id="partials_tool_boxes_more.interesting">

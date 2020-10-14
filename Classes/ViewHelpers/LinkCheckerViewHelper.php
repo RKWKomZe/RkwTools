@@ -1,5 +1,4 @@
 <?php
-
 namespace RKW\RkwTools\ViewHelpers;
 /*
  * This file is part of the TYPO3 CMS project.
@@ -13,6 +12,8 @@ namespace RKW\RkwTools\ViewHelpers;
  *
  * The TYPO3 project - inspiring people to share!
  */
+
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * LinkCheckerViewHelper
@@ -30,6 +31,10 @@ class LinkCheckerViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVie
      */
     public function render($parameter)
     {
+        if (!GeneralUtility::getApplicationContext()->isProduction()) {
+            // JUST FOR DEVELOPMENT: Because the LIVE links does not exists in local context, no tools would shown
+            return true;
+        }
 
         /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');

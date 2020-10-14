@@ -1,0 +1,82 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+	xmlns:rkwTools="http://typo3.org/ns/RKW/RkwTools/ViewHelpers"
+	xmlns:rkwAuthors="http://typo3.org/ns/RKW/RkwAuthors/ViewHelpers"
+	data-namespace-typo3-fluid="true">
+
+	<f:section name="Header">
+		<div class="tile__header has-img">
+
+			<div class="tile__label-wrapper">
+				<span class="tile__label">
+					<f:if condition="{tool.type}">
+						<f:then>
+							{tool.type.name}
+						</f:then>
+						<f:else>
+							<rkwTools:sortOfResource typolink="{tool.link}" />
+						</f:else>
+					</f:if>
+				</span>
+			</div>
+			<div class="tile__img">
+				<f:if condition="{tool.image}" >
+					<f:then>
+						<f:cObject typoscriptObjectPath="lib.txRkwTools.responsiveImageThumbnail" data="{tool.image.uid}"/>
+					</f:then>
+					<f:else>
+						&nbsp;
+					</f:else>
+				</f:if>
+			</div>
+		</div>
+	</f:section>
+
+	<!-- ================================================================================ -->
+
+
+	<f:section name="Title">
+
+		<h3 class="tile__title icon">
+			<span class="tile__title-icon tile__title-icon--margin">
+				<f:comment>
+					<!-- ToDo: Switch for icon based on DocumentType -->
+				</f:comment>
+				<svg class="icon icon--32"><use xlink:href="#ic-document" /></svg>
+			</span>
+			<span class="tile__title-text">
+				<f:format.crop maxCharacters="{settings.headerCrop}" respectWordBoundaries="false">{tool.name}</f:format.crop>
+			</span>
+		</h3>
+	</f:section>
+
+	<!-- ================================================================================ -->
+
+	<f:section name="Text">
+		<f:if condition="{tool.description}">
+			<div class="tile__text">
+				<p>
+					<f:format.crop maxCharacters="{settings.contentCrop}" respectWordBoundaries="false">{tool.description}</f:format.crop>
+				</p>
+			</div>
+		</f:if>
+	</f:section>
+
+	<!-- ================================================================================ -->
+
+	<f:section name="Footer">
+		<div class="tile__footer tile__contact">
+			<div class="tile__contact-text">
+				<svg class="icon icon--16"><use xlink:href="#ic-date" /></svg>
+				<f:if condition="{tool.tstamp}">
+					<f:then>
+						<f:format.date format="d.m.Y">{tool.tstamp}</f:format.date>
+					</f:then>
+					<f:else>
+						-
+					</f:else>
+				</f:if>
+			</div>
+		</div>
+	</f:section>
+
+</html>
