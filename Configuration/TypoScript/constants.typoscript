@@ -5,31 +5,34 @@ module.tx_rkwtools {
 	}
 }
 
-plugin.tx_rkwtools_overview {
+plugin.tx_rkwtools {
 	view {
-		# cat=plugin.tx_rkwtools_overview/file; type=string; label=Path to template root (FE)
+		# cat=plugin.tx_rkwtools/file; type=string; label=Path to template root (FE)
 		templateRootPath = EXT:rkw_tools/Resources/Private/Templates/
-		# cat=plugin.tx_rkwtools_overview/file; type=string; label=Path to template partials (FE)
+		# cat=plugin.tx_rkwtools/file; type=string; label=Path to template partials (FE)
 		partialRootPath = EXT:rkw_tools/Resources/Private/Partials/
-		# cat=plugin.tx_rkwtools_overview/file; type=string; label=Path to template layouts (FE)
+		# cat=plugin.tx_rkwtools/file; type=string; label=Path to template layouts (FE)
 		layoutRootPath = EXT:rkw_tools/Resources/Private/Layouts/
 	}
 	persistence {
-		# cat=plugin.tx_rkwtools_overview//a; type=string; label=Default storage PID
+		# cat=plugin.tx_rkwtools//a; type=string; label=Default storage PID
 		storagePid =
 	}
 	settings {
+
+        # cat=plugin.tx_rkwtools//f; type=integer; label=Version to use (the version is mainly related to the new RkwAjax-API)
+        version = 2
 		cache {
-			# cat=plugin.tx_rkwtools_overview//a; type=integer; label=Cache time to live
+			# cat=plugin.tx_rkwtools//a; type=integer; label=Cache time to live
 			ttl = 86400
 		}
-		# cat=plugin.tx_rkwtools_overview//f; type=integer; label=PageType for Ajax Plugin
+		# cat=plugin.tx_rkwtools//f; type=integer; label=PageType for Ajax Plugin
 		pageTypeAjax = 1512989710
-		# cat=plugin.tx_rkwtools_overview//a; type=integer; label=Default header text cropping
+		# cat=plugin.tx_rkwtools//a; type=integer; label=Default header text cropping
 		headerCrop = 60
-		# cat=plugin.tx_rkwtools_overview//a; type=integer; label=Default body text cropping
+		# cat=plugin.tx_rkwtools//a; type=integer; label=Default body text cropping
 		contentCrop = 230
-		# cat=plugin.tx_rkwtools_overview//a; type=integer; label=Default footer text cropping
+		# cat=plugin.tx_rkwtools//a; type=integer; label=Default footer text cropping
 		footerCrop = 20
 	}
 }

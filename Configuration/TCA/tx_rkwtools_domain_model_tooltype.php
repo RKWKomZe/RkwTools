@@ -17,7 +17,8 @@ return [
 		'searchFields' => 'name,description,image,link,sys_category,projects,department',
 		'iconfile' => 'EXT:rkw_tools/Resources/Public/Icons/tx_rkwtools_domain_model_tooltype.gif',
 		'dividers2tabs' => TRUE,
-		'requestUpdate' => 'sys_category_parent'
+        //@toDo: does this mean 'sys_category' of the tool-TCA??
+		//'requestUpdate' => 'sys_category_parent'
 	],
 	'interface' => [
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, description',

@@ -1,6 +1,18 @@
-{namespace rkw=RKW\RkwTools\ViewHelpers}
-<p>
-	<label for="category-select" class="hide"><f:translate key="partials_tool_list_filters.categoryLabelLong" /></label>
-	<f:form.select value="<rkw:selectPreselect filterUid='{selectedCategory}' configList='{settings.sysCategoryList}' />" id="category-select" property="category" name="category" class="secondary ajax" options="{categoryList}" optionValueField="uid" optionLabelField="title" prependOptionLabel="<f:translate key='partials_tool_list_filters.showAllCategory' />" prependOptionValue="0" />
-</p>
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwTools/ViewHelpers"
+    data-namespace-typo3-fluid="true">
 
+    <f:form.select
+        class="select-field select-field--longer ajax"
+        id="category-select"
+        value="<rkw:selectPreselect filterUid='{selectedCategory.uid}' configList='{settings.sysCategoryList}' />"
+        property="category"
+        name="category"
+        options="{categoryList}"
+        optionValueField="uid"
+        optionLabelField="title"
+        prependOptionLabel="<f:translate key='partials_tool_list_filters.showAllCategory' />"
+        prependOptionValue="0"
+    />
+
+</html>

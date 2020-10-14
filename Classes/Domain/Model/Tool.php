@@ -24,6 +24,14 @@ namespace RKW\RkwTools\Domain\Model;
  */
 class Tool extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
+
+    /**
+     * tstamp
+     *
+     * @var int
+     */
+    protected $tstamp;
+
     /**
      * name
      *
@@ -103,6 +111,16 @@ class Tool extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->sysCategoryParent = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->sysCategory = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->projects = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+    }
+
+    /**
+     * Returns the tstamp
+     *
+     * @return int $tstamp
+     */
+    public function getTstamp()
+    {
+        return $this->tstamp;
     }
 
     /**
