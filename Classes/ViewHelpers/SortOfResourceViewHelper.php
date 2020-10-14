@@ -18,6 +18,7 @@ namespace RKW\RkwTools\ViewHelpers;
  * SortOfResourceViewHelper
  *
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
+ * @author Steffen Kroggel <developer@steffenkroggel.de>
  * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwTools
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
@@ -27,13 +28,35 @@ class SortOfResourceViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstract
     /**
      * @param mixed $typolink
      * @return string
+     * @see: https://docs.typo3.org/m/typo3/reference-typoscript/8.7/en-us/Functions/Typolink/Index.html#resource-references
      */
     public function render($typolink)
     {
-        // internal file
-        if (substr($typolink, 0, 5) === "file:") {
-            return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('viewhelper.file', 'rkwTools');
-            //===
+        // new version of typolink
+        if (strpos($typolink, 't3://') === 0) {
+
+            // internal file
+            if (substr($typolink, 5, 4) === "file") {
+                return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('viewhelper.file', 'rkwTools');
+            }
+
+            // internal page
+            if (substr($typolink, 5, 4) === "page") {
+                return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('viewhelper.internalPage', 'rkwTools');
+            }
+
+        // old version of typolink
+        } else {
+
+            // internal file
+            if (substr($typolink, 0, 5) === "file:") {
+                return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('viewhelper.file', 'rkwTools');
+            }
+
+            // internal page
+            if (is_numeric($typolink)) {
+                return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('viewhelper.internalPage', 'rkwTools');
+            }
         }
 
         // external link
@@ -43,18 +66,10 @@ class SortOfResourceViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstract
             || substr($typolink, 0, 5) === "https"
         ) {
             return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('viewhelper.externalPage', 'rkwTools');
-            //===
-        }
-
-        // internal page
-        if (is_numeric($typolink)) {
-            return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('viewhelper.internalPage', 'rkwTools');
-            //===
         }
 
         // other
         return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('viewhelper.other', 'rkwTools');
-        //===
     }
 
 }

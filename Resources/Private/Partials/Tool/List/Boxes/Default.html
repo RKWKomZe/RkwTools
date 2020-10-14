@@ -5,51 +5,26 @@
 
 
     <f:if condition="<rkwTools:LinkChecker parameter='{tool.link}' />">
+
         <div class="flex-item flex-basis-3">
             <div class="tile">
-                <rkwEtracker:link.typolink parameter="{tool.link}" class="box {tool.department.cssClass} big" target="{f:if(condition: '{settingsArray.openLinksInSameWindow}', then: '', else: '_blank')}" title="{pages.title}">
-                    <f:comment><!-- title --></f:comment>
-                    <div class="tile__header {f:if(condition: '{tool.image}', then: 'has-img')}">
-                        <f:comment>
-                            <div class="tile__label-wrapper">
-                                <span class="tile__label">
-                                    <rkwTools:sortOfResource typolink='{tool.link}' />
-                                </span>
-                            </div>
-                        </f:comment>
-                        <f:if condition="{tool.image}">
-                            <div class="tile__img">
-                                <f:cObject typoscriptObjectPath="plugin.tx_rkwtools.libs.responsiveImageThumbnail" data="{tool.image.uid}"/>
-                            </div>
-                        </f:if>
-                    </div>
 
-                    <f:comment><!-- content --></f:comment>
-                    <div class="tile__content">
-                        <h3 class="tile__title icon">
-                            <span class="tile__title-text">
-                                <f:format.crop maxCharacters="{settingsArray.headerCrop}" respectWordBoundaries="false">{tool.name}</f:format.crop>
-                            </span>
-                        </h3>
-                        <div class="tile__text">
-                            <p>
-                                <f:if condition="{tool.image}">
-                                    <f:then>
-                                        <f:comment><!-- simply use headerCrop to take it short --></f:comment>
-                                        <f:format.crop maxCharacters="{settingsArray.headerCrop}" respectWordBoundaries="false">{tool.description}</f:format.crop>
-                                    </f:then>
-                                    <f:else>
-                                        <f:format.crop maxCharacters="{settingsArray.contentCrop}" respectWordBoundaries="false">{tool.description}</f:format.crop>
-                                    </f:else>
-                                </f:if>
-                            </p>
-                        </div>
-                    </div>
+                <f:render partial="Tool/List/Boxes/Default/Inner" section="Header" arguments="{_all}" />
 
-                    <f:comment><!-- footer --></f:comment>
-                    <div class="tile__footer tile__contact">
-                        <f:translate key="partials_tool_list_boxes_default.tool" extensionName="RkwTools" /><f:if condition="{tool.type}">: {tool.type.name}</f:if>
-                    </div>
+                <div class="tile__content">
+                    <f:render partial="Tool/List/Boxes/Default/Inner" section="Title" arguments="{_all}" />
+                    <f:render partial="Tool/List/Boxes/Default/Inner" section="Text" arguments="{_all}" />
+                </div>
+
+                <f:render partial="Tool/List/Boxes/Default/Inner" section="Footer" arguments="{_all}" />
+
+                <rkwEtracker:link.typolink
+                    class="tile__link-overlay"
+                    parameter="{tool.link}"
+                    title="{tool.name}"
+                    target="{f:if(condition: '{settings.openLinksInSameWindow}', then: '', else: '_blank')}"
+                >
+                    {tool.name}
                 </rkwEtracker:link.typolink>
             </div>
         </div>

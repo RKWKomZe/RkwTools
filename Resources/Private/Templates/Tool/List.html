@@ -1,39 +1,25 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
     xmlns:rkwAjax="http://typo3.org/ns/RKW/RkwAjax/ViewHelpers"
     data-namespace-typo3-fluid="true">
-<f:layout name="Default" />
-
-This Template is responsible for creating a table of domain objects.
-
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        List.html: keep
-
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+    <f:layout name="Default" />
 
     <f:section name="main">
         <f:render partial="Tool/List/Filter" arguments="{_all}" />
 
         <rkwAjax:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="replace" ajaxId="1">
-            <div id="tx-rkwtools-result-section" class="search-result-section" aria-live="assertive" aria-atomic="true" role="main">
+            <div class="flex-container" aria-live="assertive" aria-atomic="true" role="main">
+
                 <f:if condition="{toolList}">
                     <f:then>
-                        <div id="tx-rkwtools-boxes-grid" class="tiles-wrapper">
+                        <div class="tiles-wrapper">
                             <rkwAjax:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="append" ajaxId="2">
                                 <div class="tiles flex-container flex-container--margin">
                                     <f:render partial="Tool/List/Common" arguments="{_all}" />
                                 </div>
                             </rkwAjax:ajaxWrapper>
 
-                            <f:comment><!-- see more --></f:comment>
-                            <f:if condition="{settingsArray.showMoreLink}">
-                                <f:if condition="{moreItemsAvailable}">
-                                    <f:render partial="Tool/List/Boxes/More" arguments="{_all}" />
-                                </f:if>
-                            </f:if>
+                            <f:render partial="Tool/List/Boxes/More" arguments="{_all}" />
+
                         </div>
                     </f:then>
                     <f:else>

@@ -116,17 +116,9 @@
 				<source>Items per page</source>
 				<target>Elemente pro Seite</target>
 			</trans-unit>
-			<trans-unit id="flexform.overview.maximumShownResults">
-				<source>Maximum shown results</source>
-				<target>Maximal angezeigte Elemente</target>
-			</trans-unit>
 			<trans-unit id="flexform.overview.showMoreLink">
 				<source>Show more link</source>
 				<target>Zeige mehr-Link</target>
-			</trans-unit>
-			<trans-unit id="flexform.overview.autoload">
-				<source>Disable autoload</source>
-				<target>Autoload deaktivieren</target>
 			</trans-unit>
 			<trans-unit id="flexform.overview.openWindow">
 				<source>Open links in same window</source>

@@ -1,8 +1,7 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-    xmlns:rkwBasics="http://typo3.org/ns/RKW/RkwBasics/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
-    <f:if condition="<rkwBasics:or or1='{settings.showDepartment}' or2='{settings.showCategory}' or3='{settingsArray.showProjects}' />">
+    <f:if condition="{settings.showDepartment} || {settings.showCategory} || {settings.showProjects}">
         <f:form
             id="search-form"
             class="ajax"
@@ -11,7 +10,6 @@
             controller="Tool"
             extensionName="RkwTools"
             pluginName="Overview"
-            arguments="{ttContentUid: ttContentUid}"
             additionalParams="{rkw_ajax : '{key: ajaxHelper.key, cid: ajaxHelper.contentUid, idl: \'1\'}'}"
         >
             <div class="btn-list btn-list--desktop">
@@ -21,7 +19,7 @@
                 <f:if condition="{settings.showCategory}">
                     <f:render partial="Tool/List/Filters/Category" arguments="{_all}" />
                 </f:if>
-                <f:if condition="{settingsArray.showProjects}">
+                <f:if condition="{settings.showProjects}">
                     <f:render partial="Tool/List/Filters/Projects" arguments="{_all}" />
                 </f:if>
             </div>

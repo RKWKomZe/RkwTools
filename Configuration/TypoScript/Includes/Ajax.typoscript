@@ -1,0 +1,39 @@
+// =================================
+// @DEPRECATED COMPLETELY
+// =================================
+
+txRkwToolsOverviewAjax = PAGE
+txRkwToolsOverviewAjax {
+	typeNum = {$plugin.tx_rkwtools.settings.pageTypeAjax}
+	config {
+
+		disableAllHeaderCode = 1
+		xhtml_cleaning = 0
+		admPanel = 0
+		no_cache = 0
+		debug = 0
+
+		additionalHeaders.10.header = Content-type: application/json
+		metaCharset = utf-8
+
+		index_enable = 0
+		index_metatags = 0
+		index_externals = 0
+	}
+
+	10 = USER_INT
+	10 {
+		userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+		extensionName = RkwTools
+		pluginName = Overview
+		vendorName = RKW
+		switchableControllerActions {
+			Tool {
+				1 = list
+			}
+		}
+		view < plugin.tx_rkwtools.view
+		persistence < plugin.tx_rkwtools.persistence
+		settings < plugin.tx_rkwtools.settings
+	}
+}

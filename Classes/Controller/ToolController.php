@@ -75,13 +75,6 @@ class ToolController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      */
     protected $toolRepository;
 
-    /**
-     * contentRepository
-     *
-     * @var \RKW\RkwBasics\Domain\Repository\ContentRepository
-     * @inject
-     */
-    protected $contentRepository;
 
     /**
      * departmentRepository
@@ -151,16 +144,17 @@ class ToolController extends \RKW\RkwAjax\Controller\AjaxAbstractController
             $projects = null;
         }
 
-        // 1. Attention: Reading plugin's content element uid does not work in ajax-context (return PID instead of plugins content element uid)
+        // Attention: Following line doesn't work in ajax-context (return PID instead of plugins content element uid)
         if (!$ttContentUid) {
-            $ttContentUid = intval($this->configurationManager->getContentObject()->data['uid']);
+            $ttContentUid = $this->ajaxHelper->getContentUid();
+
+        /** @deprecated - making old version work with new ajax */
+        } else if ($ttContentUid) {
+            $this->ajaxHelper->setContentUid($ttContentUid);
+            $this->loadSettingsFromFlexForm();
         }
 
-        // 2. Get flexForm settings of plugin: In ajax context we have to grab it by ourselves
-        // Attention: Fluid will does not know the common {settings}-var in ajax context!
-        foreach ($this->contentRepository->fetchFlexFormDataByUid(intval($ttContentUid), $this->request->getPluginName(), $this->extensionName) as $settingKey => $settingValue) {
-            $this->settings[str_replace('settings.', '', $settingKey)] = $settingValue;
-        }
+
         // Current state: No caching if someone is filtering via frontend form
         $this->cacheIdentifier = intval($GLOBALS['TSFE']->id) . '_' . $ttContentUid . '_rkwtools_' . strtolower($this->request->getPluginName()) . '_' . intval($pageNumber);
         if (
@@ -192,30 +186,42 @@ class ToolController extends \RKW\RkwAjax\Controller\AjaxAbstractController
             $this->cacheResults();
         }
 
-        $moreItemsAvailable = ($pageNumber * $this->settings['itemsPerPage']) < $this->fullResultCount ? true : false;
+        $showMoreLink = $moreItemsAvailable = ($pageNumber * $this->settings['itemsPerPage']) < $this->fullResultCount ? true : false;
+
+        /**
         if (intval($this->settings['maximumShownResults'])) {
             $showMoreLink = ($pageNumber * $this->settings['itemsPerPage']) < intval($this->settings['maximumShownResults']) ? true : false;
         } else {
             $this->settings['maximumShownResults'] = PHP_INT_MAX;
             $showMoreLink = true;
-        }
+        }*/
 
         // 4. Set replacements for view
-        $replacements = array(
+        $replacements = [
             'selectedDepartment' => $department,
             'selectedCategory'   => $category,
             'selectedProjects'   => $projects,
             'pageNumber'         => $pageNumber,
-            'ttContentUid'       => $ttContentUid,
-            'moreItemsAvailable' => $moreItemsAvailable,
             'showMoreLink'       => $showMoreLink,
-            'requestType'        => ($pageNumber > 1 ? 'append' : 'replace'),
             'toolList'           => $this->toolList,
             'departmentList'     => $this->departmentList,
             'categoryList'       => $this->categoryList,
-            'settingsArray'      => $this->settings,
             'projectsList'       => $this->projectsList,
-        );
+        ];
+
+        if ($this->settings['version'] == 1) {
+
+            // @DEPRECATED This part is just vor using the old AjaxApi
+            $replacements = array_merge(
+                $replacements,
+                [
+                    'requestType'        => ($pageNumber > 1 ? 'append' : 'replace'),
+                    'ttContentUid'       => $ttContentUid,
+                    'settingsArray'      => $this->settings,
+                    'moreItemsAvailable' => $moreItemsAvailable
+                ]
+            );
+        }
 
         // 5. distinguish between normal view and ajax request
         // Hint: If we're using AjaxApi 2, we use simple assignMultiple and no "exit();" statement
