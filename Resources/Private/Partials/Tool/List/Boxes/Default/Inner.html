@@ -67,9 +67,9 @@
 		<div class="tile__footer tile__contact">
 			<div class="tile__contact-text">
 				<svg class="icon icon--16"><use xlink:href="#ic-date" /></svg>
-				<f:if condition="{tool.tstamp}">
+				<f:if condition="{tool.crdate}">
 					<f:then>
-						<f:format.date format="d.m.Y">{tool.tstamp}</f:format.date>
+						<f:format.date format="d.m.Y">{tool.crdate}</f:format.date>
 					</f:then>
 					<f:else>
 						-
