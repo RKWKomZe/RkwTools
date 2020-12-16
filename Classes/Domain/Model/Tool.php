@@ -26,6 +26,13 @@ class Tool extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
+     * crdate
+     *
+     * @var int
+     */
+    protected $crdate;
+
+    /**
      * tstamp
      *
      * @var int
@@ -111,6 +118,16 @@ class Tool extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->sysCategoryParent = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->sysCategory = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->projects = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+    }
+
+    /**
+     * Returns the crdate
+     *
+     * @return int $crdate
+     */
+    public function getCrdate()
+    {
+        return $this->crdate;
     }
 
     /**
