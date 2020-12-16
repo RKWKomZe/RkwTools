@@ -212,10 +212,6 @@ return [
 			'config' => [
 				'type' => 'input',
                 'renderType' => 'inputLink',
-				'size' => '50',
-				'max' => '1024',
-				'eval' => 'trim, required',
-				'softref' => 'typolink'
 			]
 		],
 		'sys_category' => [
