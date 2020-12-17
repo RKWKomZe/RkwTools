@@ -23,6 +23,7 @@ config.tx_extbase.persistence {
             mapping {
                 columns {
                     tstamp.mapOnProperty = tstamp
+                    crdate.mapOnProperty = crdate
                 }
             }
         }
