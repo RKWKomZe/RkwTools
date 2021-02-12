@@ -207,7 +207,7 @@ return [
 				'renderType' => 'selectMultipleSideBySide',
 				'foreign_table' => 'tx_rkwprojects_domain_model_projects',
 				'foreign_table_where' => 'AND ((\'###PAGE_TSCONFIG_IDLIST###\' <> \'0\' AND FIND_IN_SET(tx_rkwprojects_domain_model_projects.pid,\'###PAGE_TSCONFIG_IDLIST###\')) OR (\'###PAGE_TSCONFIG_IDLIST###\' = \'0\')) AND tx_rkwprojects_domain_model_projects.sys_language_uid = ###REC_FIELD_sys_language_uid### AND tx_rkwprojects_domain_model_projects.deleted = 0 AND tx_rkwprojects_domain_model_projects.hidden = 0 ORDER BY tx_rkwprojects_domain_model_projects.pid ASC, tx_rkwprojects_domain_model_projects.status ASC, tx_rkwprojects_domain_model_projects.short_name ASC, tx_rkwprojects_domain_model_projects.name ASC',
-                'itemsProcFunc' => 'RKW\RkwProjects\TCA\SelectOptions->getExtendedProjectName',
+                'itemsProcFunc' => 'RKW\RkwProjects\TCA\OptionLabels->getExtendedProjectNamesByUid',
                 'minitems' => 0,
 				'maxitems' => 9999,
 				'appearance' => [
