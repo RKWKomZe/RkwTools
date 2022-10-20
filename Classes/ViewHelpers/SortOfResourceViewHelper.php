@@ -23,15 +23,29 @@ namespace RKW\RkwTools\ViewHelpers;
  * @package RKW_RkwTools
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class SortOfResourceViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class SortOfResourceViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+
     /**
-     * @param mixed $typolink
+     * Initialize arguments
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('typolink', 'string', 'The typolink', true);
+    }
+
+
+    /**
      * @return string
      * @see: https://docs.typo3.org/m/typo3/reference-typoscript/8.7/en-us/Functions/Typolink/Index.html#resource-references
      */
-    public function render($typolink)
+    public function render(): string
     {
+
+        /** @var string $typolink */
+        $typolink = $this->arguments['typolink'];
+
         // new version of typolink
         if (strpos($typolink, 't3://') === 0) {
 

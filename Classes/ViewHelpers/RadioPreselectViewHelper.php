@@ -22,22 +22,41 @@ namespace RKW\RkwTools\ViewHelpers;
  * @package RKW_RkwTools
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class RadioPreselectViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class RadioPreselectViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+
     /**
-     * @param integer $currentUid
-     * @param integer $filterUid
-     * @param string $configList
+     * Initialize arguments
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('currentUid', 'int', 'The current uid.', true);
+        $this->registerArgument('filterUid', 'int', 'The filter uid.', true);
+        $this->registerArgument('configList', 'array', 'The array of options.', true);
+
+    }
+
+
+    /**
      * @return boolean
      */
-    public function render($currentUid, $filterUid, $configList)
+    public function render(): bool
     {
+
+        /** @var int $currentUid */
+        $currentUid = $this->arguments['currentUid'];
+
+        /** @var int $filterUid */
+        $filterUid = $this->arguments['filterUid'];
+
+        /** @var array $configList */
+        $configList = $this->arguments['configList'];
         $configList = explode(',', $configList);
 
         // is a filter set?
         if (intval($filterUid) == $currentUid) {
             return true;
-            //===
         }
 
         // If only one item in the configList is set, we preselect this
@@ -47,11 +66,9 @@ class RadioPreselectViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstract
             && (!$filterUid)
         ) {
             return true;
-            //===
         }
 
         return false;
-        //===
     }
 
 }

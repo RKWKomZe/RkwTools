@@ -23,16 +23,30 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  * @package RKW_RkwTools
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class LinkCheckerViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class LinkCheckerViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+
     /**
-     * @param string $parameter
+     * Initialize arguments
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('parameter', 'string', 'The parameters.', true);
+    }
+
+
+    /**
      * @return bool
      */
-    public function render($parameter)
+    public function render(): bool
     {
+
+        /** @var string $parameter */
+        $parameter = $this->arguments['parameter'];
+
         if (!GeneralUtility::getApplicationContext()->isProduction()) {
-            // JUST FOR DEVELOPMENT: Because the LIVE links does not exists in local context, no tools would shown
+            // JUST FOR DEVELOPMENT: Because the LIVE links does not exist in local context, no tools would be shown
             return true;
         }
 
@@ -48,9 +62,7 @@ class LinkCheckerViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVie
             ]
         );
 
-        return $uri ? true : false;
-        //===
-
+        return (bool)$uri;
     }
 
 }

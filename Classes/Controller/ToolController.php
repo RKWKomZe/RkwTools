@@ -71,7 +71,7 @@ class ToolController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      * toolRepository
      *
      * @var \RKW\RkwTools\Domain\Repository\ToolRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $toolRepository;
 
@@ -80,7 +80,7 @@ class ToolController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      * departmentRepository
      *
      * @var \RKW\RkwBasics\Domain\Repository\DepartmentRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $departmentRepository;
 
@@ -88,7 +88,7 @@ class ToolController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      * categoryRepository
      *
      * @var \RKW\RkwBasics\Domain\Repository\CategoryRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $categoryRepository;
 
@@ -96,7 +96,7 @@ class ToolController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      * projectsRepository
      *
      * @var \RKW\RkwProjects\Domain\Repository\ProjectsRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $projectsRepository;
 
@@ -131,7 +131,7 @@ class ToolController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      * @param \RKW\RkwProjects\Domain\Model\Projects $projects
      * @param integer $pageNumber
      * @param integer $ttContentUid
-     * @ignorevalidation $projects
+     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("projects")
      * @return void
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
@@ -139,7 +139,7 @@ class ToolController extends \RKW\RkwAjax\Controller\AjaxAbstractController
     {
         $pageNumber++;
 
-        // for secure after @ignorevalidation
+        // for secure after @TYPO3\CMS\Extbase\Annotation\IgnoreValidation
         if (!$projects instanceof Projects) {
             $projects = null;
         }
@@ -236,7 +236,7 @@ class ToolController extends \RKW\RkwAjax\Controller\AjaxAbstractController
             // @DEPRECATED This part is just vor using the old AjaxApi
 
             // get JSON helper
-            /** @var \RKW\RkwBasics\Helper\Json $jsonHelper */
+            /** @var \RKW\RkwAjax\Encoder\JsonTemplateEncoder $jsonHelper */
             $jsonHelper = GeneralUtility::makeInstance('RKW\\RkwBasics\\Helper\\Json');
             // Here we are in ajax context: If the pageNumber is greater than 1, we want to show further results.
             // Otherwise a replace!

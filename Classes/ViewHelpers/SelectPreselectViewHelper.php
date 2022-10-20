@@ -22,15 +22,29 @@ namespace RKW\RkwTools\ViewHelpers;
  * @package RKW_RkwTools
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class SelectPreselectViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class SelectPreselectViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
     /**
-     * @param integer $filterUid
-     * @param string $configList
-     * @return integer
+     * Initialize arguments
      */
-    public function render($filterUid, $configList)
+    public function initializeArguments()
     {
+        parent::initializeArguments();
+        $this->registerArgument('filterUid', 'int', 'The filter uid.', true);
+        $this->registerArgument('configList', 'array', 'The array of options.', true);
+    }
+
+
+    /**
+     * @return boolean
+     */
+    public function render(): bool
+    {
+        /** @var int $filterUid */
+        $filterUid = $this->arguments['filterUid'];
+
+        /** @var array $configList */
+        $configList = $this->arguments['configList'];
         $configList = explode(',', $configList);
 
         // is a filter set?
