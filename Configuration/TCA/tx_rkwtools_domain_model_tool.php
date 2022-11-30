@@ -235,7 +235,7 @@ return [
 				'type' => 'select',
 				'renderType' => 'selectSingle',
 				'foreign_table' => 'tx_rkwbasics_domain_model_department',
-				'foreign_table_where' => 'AND tx_rkwbasics_domain_model_department.deleted = 0 AND tx_rkwbasics_domain_model_department.hidden = 0 ORDER BY tx_rkwbasics_domain_model_department.name',
+				'foreign_table_where' => 'AND tx_rkwbasics_domain_model_department.sys_language_uid = ###REC_FIELD_sys_language_uid### AND tx_rkwbasics_domain_model_department.deleted = 0 AND tx_rkwbasics_domain_model_department.hidden = 0 ORDER BY tx_rkwbasics_domain_model_department.name',
 				'minitems' => 1,
 				'maxitems' => 1,
 				'appearance' => [
