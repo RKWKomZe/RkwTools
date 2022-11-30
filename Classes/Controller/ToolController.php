@@ -25,7 +25,7 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
  * Class ToolController
  *
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwTools
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -147,13 +147,7 @@ class ToolController extends \RKW\RkwAjax\Controller\AjaxAbstractController
         // Attention: Following line doesn't work in ajax-context (return PID instead of plugins content element uid)
         if (!$ttContentUid) {
             $ttContentUid = $this->ajaxHelper->getContentUid();
-
-        /** @deprecated - making old version work with new ajax */
-        } else if ($ttContentUid) {
-            $this->ajaxHelper->setContentUid($ttContentUid);
-            $this->loadSettingsFromFlexForm();
         }
-
 
         // Current state: No caching if someone is filtering via frontend form
         $this->cacheIdentifier = intval($GLOBALS['TSFE']->id) . '_' . $ttContentUid . '_rkwtools_' . strtolower($this->request->getPluginName()) . '_' . intval($pageNumber);
@@ -188,13 +182,6 @@ class ToolController extends \RKW\RkwAjax\Controller\AjaxAbstractController
 
         $showMoreLink = $moreItemsAvailable = ($pageNumber * $this->settings['itemsPerPage']) < $this->fullResultCount ? true : false;
 
-        /**
-        if (intval($this->settings['maximumShownResults'])) {
-            $showMoreLink = ($pageNumber * $this->settings['itemsPerPage']) < intval($this->settings['maximumShownResults']) ? true : false;
-        } else {
-            $this->settings['maximumShownResults'] = PHP_INT_MAX;
-            $showMoreLink = true;
-        }*/
 
         // 4. Set replacements for view
         $replacements = [
@@ -209,48 +196,8 @@ class ToolController extends \RKW\RkwAjax\Controller\AjaxAbstractController
             'projectsList'       => $this->projectsList,
         ];
 
-        if ($this->settings['version'] == 1) {
 
-            // @DEPRECATED This part is just vor using the old AjaxApi
-            $replacements = array_merge(
-                $replacements,
-                [
-                    'requestType'        => ($pageNumber > 1 ? 'append' : 'replace'),
-                    'ttContentUid'       => $ttContentUid,
-                    'settingsArray'      => $this->settings,
-                    'moreItemsAvailable' => $moreItemsAvailable
-                ]
-            );
-        }
-
-        // 5. distinguish between normal view and ajax request
-        // Hint: If we're using AjaxApi 2, we use simple assignMultiple and no "exit();" statement
-        if (
-            GeneralUtility::_GP('type') != intval($this->settings['pageTypeAjax'])
-            && $pageNumber === 1
-            || $this->settings['version'] == 2
-        ) {
-            $this->view->assignMultiple($replacements);
-        } else {
-
-            // @DEPRECATED This part is just vor using the old AjaxApi
-
-            // get JSON helper
-            /** @var \RKW\RkwAjax\Encoder\JsonTemplateEncoder $jsonHelper */
-            $jsonHelper = GeneralUtility::makeInstance('RKW\\RkwBasics\\Helper\\Json');
-            // Here we are in ajax context: If the pageNumber is greater than 1, we want to show further results.
-            // Otherwise a replace!
-            $jsonHelper->setHtml(
-                $pageNumber > 1 ? 'tx-rkwtools-boxes-grid' : 'tx-rkwtools-result-section',
-                $replacements,
-                $pageNumber > 1 ? 'append' : 'replace',
-                'Ajax/List.html'
-            );
-
-            print (string)$jsonHelper;
-            exit();
-            //===
-        }
+        $this->view->assignMultiple($replacements);
     }
 
 
