@@ -1,6 +1,6 @@
 lib.txRkwTools {
 
-	responsiveImageThumbnail < lib.txRkwBasics.responsiveImage
+	responsiveImageThumbnail < lib.txAccelerator.responsiveImage
 	responsiveImageThumbnail {
         settings {
             breakpoint {
