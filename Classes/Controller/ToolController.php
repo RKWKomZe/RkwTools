@@ -29,7 +29,7 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
  * @package RKW_RkwTools
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class ToolController extends \RKW\RkwAjax\Controller\AjaxAbstractController
+class ToolController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
 {
     /**
      * $toolList

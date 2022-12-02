@@ -1,22 +1,22 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-    xmlns:rkwAjax="http://typo3.org/ns/RKW/RkwAjax/ViewHelpers"
+    xmlns:ajaxApi="http://typo3.org/ns/Madj2k/AjaxApi/ViewHelpers"
     data-namespace-typo3-fluid="true">
     <f:layout name="Default" />
 
     <f:section name="main">
         <f:render partial="Tool/List/Filter" arguments="{_all}" />
 
-        <rkwAjax:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="replace" ajaxId="1">
+        <ajaxApi:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="replace" ajaxId="1">
             <div class="flex-container" aria-live="assertive" aria-atomic="true" role="main">
 
                 <f:if condition="{toolList}">
                     <f:then>
                         <div class="tiles-wrapper">
-                            <rkwAjax:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="append" ajaxId="2">
+                            <ajaxApi:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="append" ajaxId="2">
                                 <div class="tiles flex-container flex-container--margin">
                                     <f:render partial="Tool/List/Common" arguments="{_all}" />
                                 </div>
-                            </rkwAjax:ajaxWrapper>
+                            </ajaxApi:ajaxWrapper>
 
                             <f:render partial="Tool/List/Boxes/More" arguments="{_all}" />
 
@@ -27,6 +27,6 @@
                     </f:else>
                 </f:if>
             </div>
-        </rkwAjax:ajaxWrapper>
+        </ajaxApi:ajaxWrapper>
     </f:section>
 </html>
