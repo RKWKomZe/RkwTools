@@ -1,9 +1,5 @@
 <?php
-
 namespace RKW\RkwTools\Hooks;
-
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Backend\Utility\BackendUtility;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -18,13 +14,23 @@ use TYPO3\CMS\Backend\Utility\BackendUtility;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Cache\CacheManager;
+use TYPO3\CMS\Core\Log\Logger;
+use TYPO3\CMS\Core\Log\LogManager;
+use TYPO3\CMS\Core\TypoScript\TemplateService;
+use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Utility\RootlineUtility;
+
 /**
  * Class ToolHook
  *
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwTools
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @deprecated since TYPO3 9.5. This extension is going to be replaced by a new shop
  */
 class ToolHook
 {
@@ -40,19 +46,24 @@ class ToolHook
      * processDatamap_postProcessFieldArray
      * For deleting caches after change content element
      *
-     * @param $status
-     * @param $table
-     * @param $id
-     * @param $fieldArray
-     * @param $reference
+     * @param string $status
+     * @param string $table
+     * @param int $id
+     * @param array $fieldArray
+     * @param object $reference
+     * @return void
      */
-    public function processDatamap_postProcessFieldArray($status, $table, $id, &$fieldArray, &$reference)
-    {
+    public function processDatamap_postProcessFieldArray(
+        string $status,
+        string $table,
+        int $id,
+        array &$fieldArray,
+        object &$reference
+    ): void {
 
         try {
             /** @var \TYPO3\CMS\Core\Cache\CacheManager $cacheManager */
-            $cacheManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Cache\\CacheManager');
-
+            $cacheManager = GeneralUtility::makeInstance(CacheManager::class);
 
             // 1.) clear extension page cache when plugin filter is changed
             if (
@@ -69,7 +80,15 @@ class ToolHook
 
                     // clear extension cache of current page
                     $cacheManager->flushCachesByTag('tx_rkwtools' . intval($record['pid']));
-                    $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Cleared extension cache by tag for page %s. Triggered by element with uid %s in table "%s".', intval($record['pid']), $id, $table));
+                    $this->getLogger()->log(
+                        \TYPO3\CMS\Core\Log\LogLevel::INFO,
+                        sprintf(
+                            'Cleared extension cache by tag for page %s. Triggered by element with uid %s in table "%s".',
+                            intval($record['pid']),
+                            $id,
+                            $table
+                        ))
+                    ;
                 }
             }
 
@@ -83,7 +102,14 @@ class ToolHook
 
                 // clear extension cache of all pages
                 $cacheManager->flushCachesByTag('tx_rkwtools');
-                $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Cleared complete extension cache by tag. Triggered by element with uid %s in table "%s".', $id, $table));
+                $this->getLogger()->log(
+                    \TYPO3\CMS\Core\Log\LogLevel::INFO,
+                    sprintf(
+                        'Cleared complete extension cache by tag. Triggered by element with uid %s in table "%s".',
+                        $id,
+                        $table
+                    )
+                );
 
                 // clear cache of defined pages
                 $config = $this->getTsForPage(intval($record['pid']));
@@ -94,25 +120,38 @@ class ToolHook
                     foreach ($pidList as $pid) {
 
                         // clear extension cache
-                        // @toDo: if we clear all caches above, we don't need to clear the cache for one page again
+                        // @todo if we clear all caches above, we don't need to clear the cache for one page again
                         // $cacheManager->flushCachesByTag('tx_rkwtools' . $pid);
                         // $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Cleared extension cache by tag for page %s. Trigged by clearCachePageList.', intval($pid)));
 
                         // clear page cache
-                        // @toDo: Do we really need this? No plugin of this extension is cached in page-cache!
+                        // @todo Do we really need this? No plugin of this extension is cached in page-cache!
                         // GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Service\\CacheService')->clearPageCache($pid);
                         // $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Cleared page cache by tag for page %s. Trigged by clearCachePageList.', $pid));
 
                         // trigger cleaning of varnish cache
-                        GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher')->dispatch(__CLASS__, self::SIGNAL_CLEAR_PAGE_VARNISH, array(intval($pid)));
-                        $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Cleared varnish cache for page %s. Trigged by clearCachePageList.', $pid));
+                        GeneralUtility::makeInstance(Dispatcher::class)->dispatch(
+                            __CLASS__,
+                            self::SIGNAL_CLEAR_PAGE_VARNISH,
+                            [intval($pid)]
+                        );
+                        $this->getLogger()->log(
+                            \TYPO3\CMS\Core\Log\LogLevel::INFO,
+                            sprintf(
+                                'Cleared varnish cache for page %s. Triggered by clearCachePageList.',
+                                $pid
+                            )
+                        );
                     }
                 }
             }
 
 
         } catch (\Exception $e) {
-            $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('Cannot clear cache. Reason: %s', $e->getMessage()));
+            $this->getLogger()->log(
+                \TYPO3\CMS\Core\Log\LogLevel::ERROR,
+                sprintf('Cannot clear cache. Reason: %s', $e->getMessage())
+            );
         }
 
     }
@@ -123,36 +162,31 @@ class ToolHook
      *
      * @return \TYPO3\CMS\Core\Log\Logger
      */
-    protected function getLogger()
+    protected function getLogger(): Logger
     {
-        return \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Log\\LogManager')->getLogger(__CLASS__);
-        //===
+        return GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__);
     }
 
 
     /**
      * Return TS-Settings for given pid
      *
-     * @param $pageId
+     * @param int $pageId
      * @return array
      * @throws \Exception
      */
-    private function getTsForPage($pageId)
+    private function getTsForPage(int $pageId): array
     {
         /** @var \TYPO3\CMS\Core\TypoScript\TemplateService $template */
-        $template = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\TypoScript\\TemplateService');
+        $template = GeneralUtility::makeInstance(TemplateService::class);
         $template->tt_track = 0;
         $template->init();
 
-        /** @var \TYPO3\CMS\Frontend\Page\PageRepository $sysPage */
-        $sysPage = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\Page\\PageRepository');
-        $rootLine = $sysPage->getRootLine(intval($pageId));
+        /** @var array $rootLine */
+        $rootLine = GeneralUtility::makeInstance(RootlineUtility::class, intval($pageId))->get();
         $template->runThroughTemplates($rootLine, 0);
         $template->generateConfig();
 
         return $template->setup['module.']['tx_rkwtools.']['settings.'];
-        //===
     }
 }
-
-?>

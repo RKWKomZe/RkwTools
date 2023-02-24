@@ -1,6 +1,6 @@
 <?php
-
 namespace RKW\RkwTools\ViewHelpers;
+
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -18,19 +18,37 @@ namespace RKW\RkwTools\ViewHelpers;
  * SelectPreselectViewHelper
  *
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwTools
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @deprecated since TYPO3 9.5. This extension is going to be replaced by a new shop
  */
-class SelectPreselectViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class SelectPreselectViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
     /**
-     * @param integer $filterUid
-     * @param string $configList
-     * @return integer
+     * Initialize arguments
      */
-    public function render($filterUid, $configList)
+    public function initializeArguments()
     {
+        parent::initializeArguments();
+        $this->registerArgument('filterUid', 'int', 'The filter uid.', true);
+        $this->registerArgument('configList', 'array', 'The array of options.', true);
+
+        trigger_error(__CLASS__ . ' is deprecated and will be removed soon', E_USER_DEPRECATED);
+
+    }
+
+
+    /**
+     * @return boolean
+     */
+    public function render(): bool
+    {
+        /** @var int $filterUid */
+        $filterUid = $this->arguments['filterUid'];
+
+        /** @var string $configList */
+        $configList = $this->arguments['configList'];
         $configList = explode(',', $configList);
 
         // is a filter set?
@@ -46,7 +64,6 @@ class SelectPreselectViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstrac
         }
 
         return 0;
-        //===
     }
 
 }

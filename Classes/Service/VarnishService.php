@@ -1,8 +1,5 @@
 <?php
-
 namespace RKW\RkwTools\Service;
-
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -17,33 +14,39 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Opsone\Varnish\Controller\VarnishController;
+use TYPO3\CMS\Core\Log\Logger;
+use TYPO3\CMS\Core\Log\LogManager;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * VarnishService
  *
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwTools
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @deprecated since TYPO3 9.5. This extension is going to be replaced by a new shop
  */
 class VarnishService implements \TYPO3\CMS\Core\SingletonInterface
 {
 
     /**
-     * @var \TYPO3\CMS\Core\Log\Logger
+     * @var \TYPO3\CMS\Core\Log\Logger|null
      */
-    protected $logger;
+    protected ?Logger $logger = null;
 
 
     /**
      * Clears the varnish cache of the given pid
      *
-     * @param integer $pid Page-id
+     * @param int $pid Page-id
      * @return void
      */
-    public function clearCacheOfToolsEvent($pid)
+    public function clearCacheOfToolsEvent(int $pid): void
     {
 
-        $varnishController = GeneralUtility::makeInstance('Snowflake\\Varnish\\VarnishController');
+        $varnishController = GeneralUtility::makeInstance(VarnishController::class);
         $varnishController->clearCache(intval($pid));
 
         $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Deleted Varnish for pid %s', $pid));
@@ -55,15 +58,14 @@ class VarnishService implements \TYPO3\CMS\Core\SingletonInterface
      *
      * @return \TYPO3\CMS\Core\Log\Logger
      */
-    protected function getLogger()
+    protected function getLogger(): Logger
     {
 
         if (!$this->logger instanceof \TYPO3\CMS\Core\Log\Logger) {
-            $this->logger = GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
+            $this->logger = GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__);
         }
 
         return $this->logger;
-        //===
     }
 
 }

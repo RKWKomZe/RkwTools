@@ -1,13 +1,5 @@
 <?php
-
 namespace RKW\RkwTools\Controller;
-
-use \RKW\RkwBasics\Domain\Model\Department;
-use \RKW\RkwBasics\Domain\Model\Category;
-use \RKW\RkwProjects\Domain\Model\Projects;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -21,104 +13,115 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
  * The TYPO3 project - inspiring people to share!
  */
 
+use \RKW\RkwBasics\Domain\Model\Department;
+use \RKW\RkwBasics\Domain\Model\Category;
+use RKW\RkwBasics\Domain\Repository\CategoryRepository;
+use RKW\RkwBasics\Domain\Repository\DepartmentRepository;
+use \RKW\RkwProjects\Domain\Model\Projects;
+use RKW\RkwProjects\Domain\Repository\ProjectsRepository;
+use RKW\RkwTools\Domain\Repository\ToolRepository;
+use TYPO3\CMS\Core\Cache\CacheManager;
+use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+
 /**
  * Class ToolController
  *
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwTools
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @deprecated since TYPO3 9.5. This extension is going to be replaced by a new shop
  */
-class ToolController extends \RKW\RkwAjax\Controller\AjaxAbstractController
+class ToolController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
 {
     /**
-     * $toolList
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwTools\Domain\Model\Tool>
+     * @var \TYPO3\CMS\Extbase\Persistence\QueryResultInterface<\RKW\RkwTools\Domain\Model\Tool>|null
      */
-    protected $toolList;
+    protected ?QueryResultInterface $toolList = null;
+
 
     /**
-     * $departmentList
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwBasics\Domain\Model\Department>
+     * @var \TYPO3\CMS\Extbase\Persistence\QueryResultInterface<\RKW\RkwBasics\Domain\Model\Department>|null
      */
-    protected $departmentList;
+    protected ?QueryResultInterface $departmentList = null;
+
 
     /**
-     * $categoryList
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwBasics\Domain\Model\Category>
+     * @var \TYPO3\CMS\Extbase\Persistence\QueryResultInterface<\RKW\RkwBasics\Domain\Model\Category>|null
      */
-    protected $categoryList;
+    protected ?QueryResultInterface $categoryList = null;
+
 
     /**
-     * $projectsList
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwProjects\Domain\Model\Projects>
+     * @var \TYPO3\CMS\Extbase\Persistence\QueryResultInterface<\RKW\RkwProjects\Domain\Model\Projects>|null
      */
-    protected $projectsList;
+    protected ?QueryResultInterface $projectsList = null;
+
 
     /**
-     * $fullResultCount
-     * @var integer
+     * @var int
      */
-    protected $fullResultCount;
+    protected int $fullResultCount = 0;
+
 
     /**
-     * $cacheIdentifier
      * @var string
      */
-    protected $cacheIdentifier;
+    protected string $cacheIdentifier = '';
+
 
     /**
-     * toolRepository
-     *
      * @var \RKW\RkwTools\Domain\Repository\ToolRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $toolRepository;
+    protected ToolRepository $toolRepository;
 
 
     /**
-     * departmentRepository
-     *
      * @var \RKW\RkwBasics\Domain\Repository\DepartmentRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $departmentRepository;
+    protected DepartmentRepository $departmentRepository;
+
 
     /**
-     * categoryRepository
-     *
      * @var \RKW\RkwBasics\Domain\Repository\CategoryRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $categoryRepository;
+    protected CategoryRepository $categoryRepository;
+
 
     /**
-     * projectsRepository
-     *
      * @var \RKW\RkwProjects\Domain\Repository\ProjectsRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $projectsRepository;
+    protected ProjectsRepository $projectsRepository;
+
 
     /**
-     * cacheManager
-     *
-     * @var \TYPO3\CMS\Core\Cache\Frontend\VariableFrontend
+     * @var \TYPO3\CMS\Core\Cache\Frontend\FrontendInterface|null
      */
-    protected $cacheManager;
+    protected ?FrontendInterface $cacheManager = null;
+
 
     /**
-     * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
+     * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer|null
      */
-    protected $cObj;
+    protected ?ContentObjectRenderer $cObj = null;
 
 
     /**
      * action initialize
+     * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
      */
     public function initializeAction()
     {
-        $this->cacheManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Cache\\CacheManager')->getCache("rkw_tools");
+        $this->cacheManager = GeneralUtility::makeInstance(CacheManager::class)->getCache('rkw_tools');
         $this->cObj = $this->configurationManager->getContentObject();
     }
 
@@ -126,20 +129,26 @@ class ToolController extends \RKW\RkwAjax\Controller\AjaxAbstractController
     /**
      * action list
      *
-     * @param \RKW\RkwBasics\Domain\Model\Department $department
-     * @param \RKW\RkwBasics\Domain\Model\Category $category
-     * @param \RKW\RkwProjects\Domain\Model\Projects $projects
-     * @param integer $pageNumber
-     * @param integer $ttContentUid
-     * @ignorevalidation $projects
+     * @param \RKW\RkwBasics\Domain\Model\Department|null $department
+     * @param \RKW\RkwBasics\Domain\Model\Category|null $category
+     * @param \RKW\RkwProjects\Domain\Model\Projects|null $projects
+     * @param int $pageNumber
+     * @param int $ttContentUid
      * @return void
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("projects")
      */
-    public function listAction(Department $department = null, Category $category = null, Projects $projects = null, $pageNumber = 0, $ttContentUid = 0)
-    {
+    public function listAction(
+        Department $department = null,
+        Category $category = null,
+        Projects $projects = null,
+        int $pageNumber = 0,
+        int $ttContentUid = 0
+    ): void {
+
         $pageNumber++;
 
-        // for secure after @ignorevalidation
+        // for secure after @TYPO3\CMS\Extbase\Annotation\IgnoreValidation
         if (!$projects instanceof Projects) {
             $projects = null;
         }
@@ -147,16 +156,12 @@ class ToolController extends \RKW\RkwAjax\Controller\AjaxAbstractController
         // Attention: Following line doesn't work in ajax-context (return PID instead of plugins content element uid)
         if (!$ttContentUid) {
             $ttContentUid = $this->ajaxHelper->getContentUid();
-
-        /** @deprecated - making old version work with new ajax */
-        } else if ($ttContentUid) {
-            $this->ajaxHelper->setContentUid($ttContentUid);
-            $this->loadSettingsFromFlexForm();
         }
 
-
         // Current state: No caching if someone is filtering via frontend form
-        $this->cacheIdentifier = intval($GLOBALS['TSFE']->id) . '_' . $ttContentUid . '_rkwtools_' . strtolower($this->request->getPluginName()) . '_' . intval($pageNumber);
+        $this->cacheIdentifier = intval($GLOBALS['TSFE']->id) . '_' . $ttContentUid . '_rkwtools_'
+            . strtolower($this->request->getPluginName()) . '_' . intval($pageNumber);
+
         if (
             GeneralUtility::getApplicationContext()->isProduction()
             && $this->cacheManager->has($this->cacheIdentifier . '_tool')
@@ -177,24 +182,39 @@ class ToolController extends \RKW\RkwAjax\Controller\AjaxAbstractController
             $this->projectsList = $this->cacheManager->get($this->cacheIdentifier . '_projects');
 
         } else {
-            $this->toolList = $this->toolRepository->findByFilterAndConfiguration($department, $this->categoryRepository->findOneWithAllRecursiveChildren($category), $projects, $pageNumber, $this->settings);
-            $this->fullResultCount = count($this->toolRepository->findByFilterAndConfiguration($department, $this->categoryRepository->findOneWithAllRecursiveChildren($category), $projects, null, $this->settings));
+            $this->toolList = $this->toolRepository->findByFilterAndConfiguration(
+                $department,
+                $this->categoryRepository->findOneWithAllRecursiveChildren($category),
+                $projects,
+                $pageNumber,
+                $this->settings
+            );
+
+            $this->fullResultCount = count($this->toolRepository->findByFilterAndConfiguration(
+                $department,
+                $this->categoryRepository->findOneWithAllRecursiveChildren($category),
+                $projects,
+                null,
+                $this->settings
+            ));
+
             $this->departmentList = $this->departmentRepository->findAllByVisibility();
-            $this->categoryList = $this->categoryRepository->findAllOrRecursiveBySelection(array_map('trim', explode(',', $this->settings['sysCategoryList'])), false, true);
-            $this->projectsList = $this->projectsRepository->findByVisibilityAndSelection(array_map('trim', explode(',', $this->settings['projectsList'])));
+
+            $this->categoryList = $this->categoryRepository->findAllOrRecursiveBySelection(
+                array_map('trim', explode(',', $this->settings['sysCategoryList'])),
+                false,
+                true
+            );
+
+            $this->projectsList = $this->projectsRepository->findByVisibilityAndSelection(
+                array_map('trim', explode(',', $this->settings['projectsList']))
+            );
+
             // cache it for the next time!
             $this->cacheResults();
         }
 
-        $showMoreLink = $moreItemsAvailable = ($pageNumber * $this->settings['itemsPerPage']) < $this->fullResultCount ? true : false;
-
-        /**
-        if (intval($this->settings['maximumShownResults'])) {
-            $showMoreLink = ($pageNumber * $this->settings['itemsPerPage']) < intval($this->settings['maximumShownResults']) ? true : false;
-        } else {
-            $this->settings['maximumShownResults'] = PHP_INT_MAX;
-            $showMoreLink = true;
-        }*/
+        $showMoreLink = ($pageNumber * $this->settings['itemsPerPage']) < $this->fullResultCount;
 
         // 4. Set replacements for view
         $replacements = [
@@ -209,48 +229,8 @@ class ToolController extends \RKW\RkwAjax\Controller\AjaxAbstractController
             'projectsList'       => $this->projectsList,
         ];
 
-        if ($this->settings['version'] == 1) {
 
-            // @DEPRECATED This part is just vor using the old AjaxApi
-            $replacements = array_merge(
-                $replacements,
-                [
-                    'requestType'        => ($pageNumber > 1 ? 'append' : 'replace'),
-                    'ttContentUid'       => $ttContentUid,
-                    'settingsArray'      => $this->settings,
-                    'moreItemsAvailable' => $moreItemsAvailable
-                ]
-            );
-        }
-
-        // 5. distinguish between normal view and ajax request
-        // Hint: If we're using AjaxApi 2, we use simple assignMultiple and no "exit();" statement
-        if (
-            GeneralUtility::_GP('type') != intval($this->settings['pageTypeAjax'])
-            && $pageNumber === 1
-            || $this->settings['version'] == 2
-        ) {
-            $this->view->assignMultiple($replacements);
-        } else {
-
-            // @DEPRECATED This part is just vor using the old AjaxApi
-
-            // get JSON helper
-            /** @var \RKW\RkwBasics\Helper\Json $jsonHelper */
-            $jsonHelper = GeneralUtility::makeInstance('RKW\\RkwBasics\\Helper\\Json');
-            // Here we are in ajax context: If the pageNumber is greater than 1, we want to show further results.
-            // Otherwise a replace!
-            $jsonHelper->setHtml(
-                $pageNumber > 1 ? 'tx-rkwtools-boxes-grid' : 'tx-rkwtools-result-section',
-                $replacements,
-                $pageNumber > 1 ? 'append' : 'replace',
-                'Ajax/List.html'
-            );
-
-            print (string)$jsonHelper;
-            exit();
-            //===
-        }
+        $this->view->assignMultiple($replacements);
     }
 
 
@@ -278,6 +258,7 @@ class ToolController extends \RKW\RkwAjax\Controller\AjaxAbstractController
                 ),
                 $cacheTtl
             );
+
             // Full result count
             $this->cacheManager->set(
                 $this->cacheIdentifier . '_count',
@@ -292,6 +273,7 @@ class ToolController extends \RKW\RkwAjax\Controller\AjaxAbstractController
                 ),
                 $cacheTtl
             );
+
             // Department
             $this->cacheManager->set(
                 $this->cacheIdentifier . '_department',
@@ -306,6 +288,7 @@ class ToolController extends \RKW\RkwAjax\Controller\AjaxAbstractController
                 ),
                 $cacheTtl
             );
+
             // Department
             $this->cacheManager->set(
                 $this->cacheIdentifier . '_category',
@@ -320,6 +303,7 @@ class ToolController extends \RKW\RkwAjax\Controller\AjaxAbstractController
                 ),
                 $cacheTtl
             );
+
             // Projects
             $this->cacheManager->set(
                 $this->cacheIdentifier . '_projects',
