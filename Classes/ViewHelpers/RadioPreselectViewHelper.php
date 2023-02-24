@@ -21,25 +21,29 @@ namespace RKW\RkwTools\ViewHelpers;
  * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwTools
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @deprecated since TYPO3 9.5. This extension is going to be replaced by a new shop
  */
 class RadioPreselectViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
 
     /**
      * Initialize arguments
+     *
+     * @return void
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('currentUid', 'int', 'The current uid.', true);
         $this->registerArgument('filterUid', 'int', 'The filter uid.', true);
         $this->registerArgument('configList', 'array', 'The array of options.', true);
 
+        trigger_error(__CLASS__ . ' is deprecated and will be removed soon', E_USER_DEPRECATED);
     }
 
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function render(): bool
     {
@@ -50,12 +54,12 @@ class RadioPreselectViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\Abstrac
         /** @var int $filterUid */
         $filterUid = $this->arguments['filterUid'];
 
-        /** @var array $configList */
+        /** @var string $configList */
         $configList = $this->arguments['configList'];
         $configList = explode(',', $configList);
 
         // is a filter set?
-        if (intval($filterUid) == $currentUid) {
+        if ($filterUid == $currentUid) {
             return true;
         }
 

@@ -1,13 +1,5 @@
 <?php
-
 namespace RKW\RkwTools\Domain\Repository;
-
-use \RKW\RkwBasics\Domain\Model\Department;
-use \RKW\RkwProjects\Domain\Model\Projects;
-use \RKW\RkwBasics\Domain\Model\Category;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use \TYPO3\CMS\Extbase\Persistence\QueryInterface;
-use \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -29,6 +21,7 @@ use \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwTools
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @deprecated since TYPO3 9.5. This extension is going to be replaced by a new shop
  */
 class ToolTypeRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
