@@ -1,6 +1,6 @@
 <?php
-
 namespace RKW\RkwTools\Domain\Model;
+
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -14,87 +14,90 @@ namespace RKW\RkwTools\Domain\Model;
  * The TYPO3 project - inspiring people to share!
  */
 
+use RKW\RkwBasics\Domain\Model\Category;
+use RKW\RkwBasics\Domain\Model\Department;
+use RKW\RkwProjects\Domain\Model\Projects;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+
 /**
  * Class Tool
  *
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwTools
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @deprecated since TYPO3 9.5. This extension is going to be replaced by a new shop
  */
 class Tool extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
-     * crdate
-     *
      * @var int
      */
-    protected $crdate;
+    protected int $crdate = 0;
+
 
     /**
-     * tstamp
-     *
      * @var int
      */
-    protected $tstamp;
+    protected int $tstamp = 0;
+
 
     /**
-     * name
-     *
      * @var string
      */
-    protected $name;
+    protected string $name = '';
+
 
     /**
-     * description
-     *
      * @var string
      */
-    protected $description;
+    protected string $description = '';
+
 
     /**
-     * type
-     *
-     * @var \RKW\RkwTools\Domain\Model\ToolType
+     * @var \RKW\RkwTools\Domain\Model\ToolType|null
      */
-    protected $type;
+    protected ?ToolType $type = null;
+
 
     /**
-     * link
-     *
      * @var string
      */
-    protected $link;
+    protected string $link = '';
+
 
     /**
-     * image
-     *
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
-     * @cascade remove
+     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference|null
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
-    protected $image;
+    protected ?FileReference $image = null;
+
 
     /**
-     * sysCategory
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwBasics\Domain\Model\Category>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwBasics\Domain\Model\Category>|null
      */
-    protected $sysCategory;
+    protected ?ObjectStorage $sysCategory = null;
+
 
     /**
-     * projects
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwProjects\Domain\Model\Projects>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwBasics\Domain\Model\Category>|null
      */
-    protected $projects;
+    protected ?ObjectStorage $sysCategoryParent = null;
+
 
     /**
-     * department
-     *
-     * @var \RKW\RkwBasics\Domain\Model\Department
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwProjects\Domain\Model\Projects>|null
      */
-    protected $department;
+    protected ?ObjectStorage $projects = null;
+
+
+    /**
+     * @var \RKW\RkwBasics\Domain\Model\Department|null
+     */
+    protected ?Department $department = null;
+
 
     /**
      * __construct
@@ -104,6 +107,7 @@ class Tool extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         //Do not remove the next line: It would break the functionality
         $this->initStorageObjects();
     }
+
 
     /**
      * Initializes all ObjectStorage properties
@@ -120,35 +124,39 @@ class Tool extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->projects = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
 
+
     /**
      * Returns the crdate
      *
-     * @return int $crdate
+     * @return int
      */
-    public function getCrdate()
+    public function getCrdate(): int
     {
         return $this->crdate;
     }
 
+
     /**
      * Returns the tstamp
      *
-     * @return int $tstamp
+     * @return int
      */
-    public function getTstamp()
+    public function getTstamp(): int
     {
         return $this->tstamp;
     }
 
+
     /**
      * Returns the name
      *
-     * @return string $name
+     * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
+
 
     /**
      * Sets the name
@@ -156,20 +164,22 @@ class Tool extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $name
      * @return void
      */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
+
     /**
      * Returns the description
      *
-     * @return string $description
+     * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
+
 
     /**
      * Sets the description
@@ -177,20 +187,22 @@ class Tool extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $description
      * @return void
      */
-    public function setDescription($description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
+
 
     /**
      * Returns the type
      *
      * @return \RKW\RkwTools\Domain\Model\ToolType
      */
-    public function getType()
+    public function getType():? ToolType
     {
         return $this->type;
     }
+
 
     /**
      * Sets the type
@@ -198,20 +210,22 @@ class Tool extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \RKW\RkwTools\Domain\Model\ToolType $type
      * @return void
      */
-    public function setType($type)
+    public function setType(ToolType $type): void
     {
         $this->type = $type;
     }
+
 
     /**
      * Returns the link
      *
      * @return string $link
      */
-    public function getLink()
+    public function getLink(): string
     {
         return $this->link;
     }
+
 
     /**
      * Sets the link
@@ -219,20 +233,22 @@ class Tool extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $link
      * @return void
      */
-    public function setLink($link)
+    public function setLink(string $link): void
     {
         $this->link = $link;
     }
 
+
     /**
      * Returns the image
      *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
+     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference
      */
-    public function getImage()
+    public function getImage():? FileReference
     {
         return $this->image;
     }
+
 
     /**
      * Sets the image
@@ -240,10 +256,11 @@ class Tool extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
      * @return void
      */
-    public function setImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image)
+    public function setImage(FileReference $image): void
     {
         $this->image = $image;
     }
+
 
     /**
      * Adds a sysCategory
@@ -251,10 +268,11 @@ class Tool extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \RKW\RkwBasics\Domain\Model\Category $sysCategory
      * @return void
      */
-    public function addSysCategory(\RKW\RkwBasics\Domain\Model\Category $sysCategory)
+    public function addSysCategory(Category $sysCategory): void
     {
         $this->sysCategory->attach($sysCategory);
     }
+
 
     /**
      * Removes a sysCategory
@@ -262,20 +280,22 @@ class Tool extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \RKW\RkwBasics\Domain\Model\Category $sysCategoryToRemove The Question to be removed
      * @return void
      */
-    public function removeSysCategory(\RKW\RkwBasics\Domain\Model\Category $sysCategoryToRemove)
+    public function removeSysCategory(Category $sysCategoryToRemove): void
     {
         $this->sysCategory->detach($sysCategoryToRemove);
     }
+
 
     /**
      * Returns the sysCategory
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwBasics\Domain\Model\Category> $sysCategory
      */
-    public function getSysCategory()
+    public function getSysCategory(): ObjectStorage
     {
         return $this->sysCategory;
     }
+
 
     /**
      * Sets the sysCategory
@@ -283,31 +303,34 @@ class Tool extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwBasics\Domain\Model\Category> $sysCategory
      * @return void
      */
-    public function setSysCategory(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $sysCategory)
+    public function setSysCategory(ObjectStorage $sysCategory): void
     {
         $this->sysCategory = $sysCategory;
     }
+
 
     /**
      * Returns the department
      *
      * @return \RKW\RkwBasics\Domain\Model\Department department
      */
-    public function getDepartment()
+    public function getDepartment():? Department
     {
         return $this->department;
     }
 
+
     /**
      * Sets the department
      *
-     * @param string $department
+     * @param \RKW\RkwBasics\Domain\Model\Department $department
      * @return void
      */
-    public function setDepartment($department)
+    public function setDepartment(Department $department): void
     {
         $this->department = $department;
     }
+
 
     /**
      * Adds a projects
@@ -315,10 +338,11 @@ class Tool extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \RKW\RkwProjects\Domain\Model\Projects $projects
      * @return void
      */
-    public function addProjects(\RKW\RkwProjects\Domain\Model\Projects $projects)
+    public function addProjects(Projects $projects): void
     {
         $this->projects->attach($projects);
     }
+
 
     /**
      * Removes a projects
@@ -326,20 +350,22 @@ class Tool extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \RKW\RkwProjects\Domain\Model\Projects $projectsToRemove The Question to be removed
      * @return void
      */
-    public function removeProjects(\RKW\RkwProjects\Domain\Model\Projects $projectsToRemove)
+    public function removeProjects(Projects $projectsToRemove): void
     {
         $this->projects->detach($projectsToRemove);
     }
+
 
     /**
      * Returns the projects
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwProjects\Domain\Model\Projects> $projects
      */
-    public function getProjects()
+    public function getProjects(): ObjectStorage
     {
         return $this->projects;
     }
+
 
     /**
      * Sets the projects
@@ -347,7 +373,7 @@ class Tool extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwProjects\Domain\Model\Projects> $projects
      * @return void
      */
-    public function setProjects(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $projects)
+    public function setProjects(ObjectStorage $projects): void
     {
         $this->projects = $projects;
     }

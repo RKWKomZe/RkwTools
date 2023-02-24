@@ -18,26 +18,49 @@ namespace RKW\RkwTools\ViewHelpers;
  * RadioPreselectViewHelper
  *
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwTools
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @deprecated since TYPO3 9.5. This extension is going to be replaced by a new shop
  */
-class RadioPreselectViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class RadioPreselectViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+
     /**
-     * @param integer $currentUid
-     * @param integer $filterUid
-     * @param string $configList
-     * @return boolean
+     * Initialize arguments
+     *
+     * @return void
      */
-    public function render($currentUid, $filterUid, $configList)
+    public function initializeArguments(): void
     {
+        parent::initializeArguments();
+        $this->registerArgument('currentUid', 'int', 'The current uid.', true);
+        $this->registerArgument('filterUid', 'int', 'The filter uid.', true);
+        $this->registerArgument('configList', 'array', 'The array of options.', true);
+
+        trigger_error(__CLASS__ . ' is deprecated and will be removed soon', E_USER_DEPRECATED);
+    }
+
+
+    /**
+     * @return bool
+     */
+    public function render(): bool
+    {
+
+        /** @var int $currentUid */
+        $currentUid = $this->arguments['currentUid'];
+
+        /** @var int $filterUid */
+        $filterUid = $this->arguments['filterUid'];
+
+        /** @var string $configList */
+        $configList = $this->arguments['configList'];
         $configList = explode(',', $configList);
 
         // is a filter set?
-        if (intval($filterUid) == $currentUid) {
+        if ($filterUid == $currentUid) {
             return true;
-            //===
         }
 
         // If only one item in the configList is set, we preselect this
@@ -47,11 +70,9 @@ class RadioPreselectViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstract
             && (!$filterUid)
         ) {
             return true;
-            //===
         }
 
         return false;
-        //===
     }
 
 }

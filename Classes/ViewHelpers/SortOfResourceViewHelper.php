@@ -1,6 +1,6 @@
 <?php
-
 namespace RKW\RkwTools\ViewHelpers;
+
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -14,35 +14,54 @@ namespace RKW\RkwTools\ViewHelpers;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+
 /**
  * SortOfResourceViewHelper
  *
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwTools
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @deprecated since TYPO3 9.5. This extension is going to be replaced by a new shop
  */
-class SortOfResourceViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class SortOfResourceViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+
     /**
-     * @param mixed $typolink
+     * Initialize arguments
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('typolink', 'string', 'The typolink', true);
+
+        trigger_error(__CLASS__ . ' is deprecated and will be removed soon', E_USER_DEPRECATED);
+    }
+
+
+    /**
      * @return string
      * @see: https://docs.typo3.org/m/typo3/reference-typoscript/8.7/en-us/Functions/Typolink/Index.html#resource-references
      */
-    public function render($typolink)
+    public function render(): string
     {
+
+        /** @var string $typolink */
+        $typolink = $this->arguments['typolink'];
+
         // new version of typolink
         if (strpos($typolink, 't3://') === 0) {
 
             // internal file
             if (substr($typolink, 5, 4) === "file") {
-                return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('viewhelper.file', 'rkwTools');
+                return LocalizationUtility::translate('viewhelper.file', 'rkwTools');
             }
 
             // internal page
             if (substr($typolink, 5, 4) === "page") {
-                return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('viewhelper.internalPage', 'rkwTools');
+                return LocalizationUtility::translate('viewhelper.internalPage', 'rkwTools');
             }
 
         // old version of typolink
@@ -50,12 +69,12 @@ class SortOfResourceViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstract
 
             // internal file
             if (substr($typolink, 0, 5) === "file:") {
-                return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('viewhelper.file', 'rkwTools');
+                return LocalizationUtility::translate('viewhelper.file', 'rkwTools');
             }
 
             // internal page
             if (is_numeric($typolink)) {
-                return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('viewhelper.internalPage', 'rkwTools');
+                return LocalizationUtility::translate('viewhelper.internalPage', 'rkwTools');
             }
         }
 
@@ -65,11 +84,11 @@ class SortOfResourceViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstract
             || substr($typolink, 0, 4) === "http"
             || substr($typolink, 0, 5) === "https"
         ) {
-            return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('viewhelper.externalPage', 'rkwTools');
+            return LocalizationUtility::translate('viewhelper.externalPage', 'rkwTools');
         }
 
         // other
-        return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('viewhelper.other', 'rkwTools');
+        return LocalizationUtility::translate('viewhelper.other', 'rkwTools');
     }
 
 }
