@@ -194,7 +194,7 @@ class ToolController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
                 $department,
                 $this->categoryRepository->findOneWithAllRecursiveChildren($category),
                 $projects,
-                null,
+                0,
                 $this->settings
             ));
 

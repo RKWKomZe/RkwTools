@@ -32,7 +32,7 @@ class SelectPreselectViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\Abstra
     {
         parent::initializeArguments();
         $this->registerArgument('filterUid', 'int', 'The filter uid.', true);
-        $this->registerArgument('configList', 'array', 'The array of options.', true);
+        $this->registerArgument('configList', 'string', 'The string list of options.', true);
 
         trigger_error(__CLASS__ . ' is deprecated and will be removed soon', E_USER_DEPRECATED);
 
