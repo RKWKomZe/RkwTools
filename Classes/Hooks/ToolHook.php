@@ -68,8 +68,8 @@ class ToolHook
             // 1.) clear extension page cache when plugin filter is changed
             if (
                 ($table == 'tt_content')
-                && (is_int($id))
-                && ($record = BackendUtility::getRecord('tt_content', $id))
+                && (intval($id) == $id)
+                && ($record = BackendUtility::getRecord('tt_content', intval($id)))
             ) {
 
                 // if list_type starts with "rkwreleated". The function strpos delivers 0 on success
@@ -96,8 +96,8 @@ class ToolHook
             // 2.) clear extension cache of current page and all caches of defined pages on any change of tools- table
             if (
                 ($table == 'tx_rkwtools_domain_model_tool')
-                && (is_int($id))
-                && ($record = BackendUtility::getRecord('tx_rkwtools_domain_model_tool', $id))
+                && (intval($id) == $id)
+                && ($record = BackendUtility::getRecord('tx_rkwtools_domain_model_tool', intval($id)))
             ) {
 
                 // clear extension cache of all pages
