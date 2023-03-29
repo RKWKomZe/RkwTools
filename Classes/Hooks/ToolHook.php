@@ -48,7 +48,7 @@ class ToolHook
      *
      * @param string $status
      * @param string $table
-     * @param int $id
+     * @param string $id may be a string if handling new records!
      * @param array $fieldArray
      * @param object $reference
      * @return void
@@ -56,7 +56,7 @@ class ToolHook
     public function processDatamap_postProcessFieldArray(
         string $status,
         string $table,
-        int $id,
+        string $id,
         array &$fieldArray,
         object &$reference
     ): void {
