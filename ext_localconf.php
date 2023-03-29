@@ -24,7 +24,7 @@ call_user_func(
         //=================================================================
         // Register Hooks
         //=================================================================
-		$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][$extKey] = 'RKW\\RkwTools\\Hooks\\ToolHook';
+		$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][$extKey] = \RKW\RkwTools\Hooks\ToolHook::class;
 
         //=================================================================
         // Register Signal Slot for varnish-extension
@@ -35,9 +35,9 @@ call_user_func(
              */
             $signalSlotDispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class);
             $signalSlotDispatcher->connect(
-                'RKW\\RkwTools\\Hooks\\ToolHook',
+                \RKW\RkwTools\Hooks\ToolHook::class,
                 \RKW\RkwTools\Hooks\ToolHook::SIGNAL_CLEAR_PAGE_VARNISH,
-                'RKW\\RkwTools\\Service\\VarnishService',
+                \RKW\RkwTools\Service\VarnishService::class,
                 'clearCacheOfToolsEvent'
             );
         }
@@ -50,7 +50,7 @@ call_user_func(
 		}
 		// Hier ist der entscheidende Punkt! Es ist der Cache von Variablen gesetzt!
 		if( !isset($GLOBALS['TYPO3_CONF_VARS'] ['SYS']['caching']['cacheConfigurations'][$extKey]['frontend'] ) ) {
-			$GLOBALS['TYPO3_CONF_VARS'] ['SYS']['caching']['cacheConfigurations'][$extKey]['frontend'] = 'TYPO3\\CMS\\Core\\Cache\\Frontend\\VariableFrontend';
+			$GLOBALS['TYPO3_CONF_VARS'] ['SYS']['caching']['cacheConfigurations'][$extKey]['frontend'] = TYPO3\CMS\Core\Cache\Frontend\VariableFrontend::class;
 		}
 
 		if( !isset($GLOBALS['TYPO3_CONF_VARS'] ['SYS']['caching']['cacheConfigurations'][$extKey]['groups'] ) ) {
@@ -67,7 +67,7 @@ call_user_func(
                 // add a FileWriter
                 'TYPO3\\CMS\\Core\\Log\\Writer\\FileWriter' => array(
                     // configuration for the writer
-                    'logFile' => 'typo3temp/var/logs/tx_rkwtools.log'
+                    'logFile' => \TYPO3\CMS\Core\Core\Environment::getVarPath()  . '/log/tx_rkwtools.log'
                 )
             ),
         );
