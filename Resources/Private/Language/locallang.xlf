@@ -19,7 +19,7 @@
 			</trans-unit>
 
 			<!-- #################### -->
-			<!-- TEMPLATES -->
+			<!-- PARTIALS -->
 			<!-- #################### -->
 
 			<trans-unit id="partials_tool_boxes_more.showMore">
@@ -39,6 +39,10 @@
 				<source>Show more now</source>
 			</trans-unit>
 
+
+			<trans-unit id="partials_tool_boxes_default_inner.dateAriaLabel">
+				<source>Published on</source>
+			</trans-unit>
 
 			<!-- FILTER -->
 

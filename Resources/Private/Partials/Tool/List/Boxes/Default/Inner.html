@@ -33,7 +33,7 @@
 
 	<!-- ================================================================================ -->
 
-
+    
 	<f:section name="Title">
 
 		<h3 class="tile__title icon">
@@ -41,7 +41,9 @@
 				<f:comment>
 					<!-- ToDo: Switch for icon based on DocumentType -->
 				</f:comment>
-				<svg class="icon icon--32"><use xlink:href="#ic-document" /></svg>
+				<svg class="icon icon--32" aria-label="{f:if(condition:'{tool.type.name}', then: '{tool.type.name}', else: '{rkwTools:sortOfResource(typolink:\'{tool.link}\')}')}">
+                    <use xlink:href="#ic-document" />
+                </svg>
 			</span>
 			<span class="tile__title-text">
 				<f:format.crop maxCharacters="{settings.headerCrop}" respectWordBoundaries="false">{tool.name}</f:format.crop>
@@ -66,7 +68,9 @@
 	<f:section name="Footer">
 		<div class="tile__footer tile__contact">
 			<div class="tile__contact-text">
-				<svg class="icon icon--16"><use xlink:href="#ic-date" /></svg>
+				<svg class="icon icon--16" aria-label="{f:translate(key='partials_tool_boxes_default_inner.dateAriaLabel', extensionName='RkwTools')}">
+                    <use xlink:href="#ic-date" />
+                </svg>
 				<f:if condition="{tool.crdate}">
 					<f:then>
 						<f:format.date format="d.m.Y">{tool.crdate}</f:format.date>
