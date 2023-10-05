@@ -122,6 +122,7 @@ class ToolController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
     public function initializeAction()
     {
         $this->cacheManager = GeneralUtility::makeInstance(CacheManager::class)->getCache('rkw_tools');
+        // @extensionScannerIgnoreLine
         $this->cObj = $this->configurationManager->getContentObject();
     }
 
