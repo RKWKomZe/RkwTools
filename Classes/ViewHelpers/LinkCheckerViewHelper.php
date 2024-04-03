@@ -52,7 +52,7 @@ class LinkCheckerViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractVi
         /** @var string $parameter */
         $parameter = $this->arguments['parameter'];
 
-        if (!GeneralUtility::getApplicationContext()->isProduction()) {
+        if (!\TYPO3\CMS\Core\Core\Environment::getContext()->isProduction()) {
             // JUST FOR DEVELOPMENT: Because the LIVE links does not exist in local context, no tools would be shown
             return true;
         }

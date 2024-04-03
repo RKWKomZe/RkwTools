@@ -4,21 +4,13 @@ module.tx_rkwtools {
 	}
 }
 
+/** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  * TABLE-MAPPING IS DEPRECATED SINCE TYPO3 10.4
+  * PLEASE ADD ANY CHANGES TO
+  * EXT:extension/Configuration/Extbase/Persistence/Classes.php
+  * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 config.tx_extbase.persistence {
 	classes {
-		#RKW\RkwTools\Domain\Model\SysCategory {
-		#	mapping {
-		#		tableName = sys_category
-		#		recordType =
-		#	}
-		#}
-		#RKW\RkwTools\Domain\Model\Department {
-		#	mapping {
-		#		tableName = tx_rkwbasics_domain_model_department
-		#		recordType =
-		#	}
-		#}
-
         RKW\RkwTools\Domain\Model\Tool {
             mapping {
                 columns {
