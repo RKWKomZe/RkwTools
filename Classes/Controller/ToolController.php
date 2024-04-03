@@ -164,7 +164,7 @@ class ToolController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
             . strtolower($this->request->getPluginName()) . '_' . intval($pageNumber);
 
         if (
-            GeneralUtility::getApplicationContext()->isProduction()
+            \TYPO3\CMS\Core\Core\Environment::getContext()->isProduction()
             && $this->cacheManager->has($this->cacheIdentifier . '_tool')
             && $this->cacheManager->has($this->cacheIdentifier . '_count')
             && $this->cacheManager->has($this->cacheIdentifier . '_department')
