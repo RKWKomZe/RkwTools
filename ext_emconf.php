@@ -23,10 +23,10 @@ $EM_CONF[$_EXTKEY] = [
 	'version' => '9.5.0',
 	'constraints' => [
 		'depends' => [
-            'typo3' => '9.5.0-10.4.99',
-            'accelerator' => '9.5.2-10.4.99',
-            'rkw_basics' => '9.5.0-10.4.99',
-			'rkw_projects' => '9.5.0-10.4.99',
+            'typo3' => '10.4.0-10.4.99',
+            'accelerator' => '10.4.0-12.4.99',
+            'rkw_basics' => '10.4.0-12.4.999',
+			'rkw_projects' => '10.4.0-12.4.99',
 		],
 		'conflicts' => [],
 		'suggests' => [],
