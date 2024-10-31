@@ -55,6 +55,9 @@
 			<trans-unit id="partials_tool_list_filters.department">
 				<source>Topics:</source>
 			</trans-unit>
+			<trans-unit id="partials_tool_list_filters.categories.labelAria">
+				<source>Categories</source>
+			</trans-unit>
 			<trans-unit id="partials_tool_list_filters.showAllCategory">
 				<source>All categories</source>
 			</trans-unit>
