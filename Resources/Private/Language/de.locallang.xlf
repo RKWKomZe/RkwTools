@@ -65,6 +65,10 @@
 				<source>Topics:</source>
 				<target>Themen:</target>
 			</trans-unit>
+			<trans-unit id="partials_tool_list_filters.categories.labelAria">
+				<source>Categories</source>
+				<target>Kategorien</target>
+			</trans-unit>
 			<trans-unit id="partials_tool_list_filters.showAllCategory">
 				<source>All categories</source>
 				<target>Alle Kategorien</target>
