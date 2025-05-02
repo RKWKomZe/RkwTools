@@ -180,7 +180,6 @@ class ToolHook
         /** @var \TYPO3\CMS\Core\TypoScript\TemplateService $template */
         $template = GeneralUtility::makeInstance(TemplateService::class);
         $template->tt_track = 0;
-        $template->init();
 
         /** @var array $rootLine */
         $rootLine = GeneralUtility::makeInstance(RootlineUtility::class, intval($pageId))->get();
