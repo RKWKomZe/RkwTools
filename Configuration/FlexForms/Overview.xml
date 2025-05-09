@@ -15,6 +15,7 @@
 								<maxitems>9999</maxitems>
 								<minitems>0</minitems>
 								<type>select</type>
+                                <renderType>selectMultipleSideBySide</renderType>
 								<foreign_table>tx_rkwtools_domain_model_tool</foreign_table>
 								<foreign_table_where>
 									AND tx_rkwtools_domain_model_tool.deleted = 0 AND tx_rkwtools_domain_model_tool.hidden = 0
@@ -30,7 +31,8 @@
 								<maxitems>5</maxitems>
 								<minitems>0</minitems>
 								<type>select</type>
-								<foreign_table>tx_rkwprojects_domain_model_projects</foreign_table>
+                                <renderType>selectMultipleSideBySide</renderType>
+                                <foreign_table>tx_rkwprojects_domain_model_projects</foreign_table>
 								<foreign_table_where>
 									AND tx_rkwprojects_domain_model_projects.deleted = 0 AND tx_rkwprojects_domain_model_projects.hidden = 0 AND tx_rkwprojects_domain_model_projects.visibility = 1 ORDER BY tx_rkwprojects_domain_model_projects.short_name
 								</foreign_table_where>
@@ -45,6 +47,7 @@
 								<maxitems>5</maxitems>
 								<minitems>0</minitems>
 								<type>select</type>
+                                <renderType>selectMultipleSideBySide</renderType>
 								<foreign_table>tx_rkwbasics_domain_model_department</foreign_table>
 								<foreign_table_where>
 									AND tx_rkwbasics_domain_model_department.deleted = 0 AND tx_rkwbasics_domain_model_department.hidden = 0 AND tx_rkwbasics_domain_model_department.visibility = 1 ORDER BY tx_rkwbasics_domain_model_department.name
@@ -60,11 +63,7 @@
                                 <maxitems>9999</maxitems>
                                 <minitems>0</minitems>
                                 <type>select</type>
-                                <foreign_table>sys_category</foreign_table>
-                                <foreign_table_where>
-                                    AND sys_category.deleted = 0 AND sys_category.hidden = 0 ORDER BY sys_category.title
-                                </foreign_table_where>
-                                <renderMode>tree</renderMode>
+                                <renderType>selectTree</renderType>
                                 <treeConfig>
                                     <appearance>
                                         <expandAll>0</expandAll>
@@ -72,6 +71,10 @@
                                     </appearance>
                                     <parentField>parent</parentField>
                                 </treeConfig>
+                                <foreign_table>sys_category</foreign_table>
+                                <foreign_table_where>
+                                    AND sys_category.deleted = 0 AND sys_category.hidden = 0 ORDER BY sys_category.title
+                                </foreign_table_where>
                             </config>
                         </TCEforms>
                     </settings.sysCategoryList>
@@ -164,6 +167,6 @@
 			</ROOT>
 		</misc>
 
-		
+
 	</sheets>
 </T3DataStructure>
