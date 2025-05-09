@@ -10,6 +10,9 @@ return [
             'crdate' => [
                 'fieldName' => 'crdate'
             ],
+            'sysCategory' => [
+                'fieldName' => 'sys_category',
+            ],
         ],
     ],
 ];
